@@ -17,8 +17,14 @@ const Header = () => {
       </div>
       <div className="absolute left-1/2 transform -translate-x-1/2 flex justify-center">
         <nav className="hidden md:flex space-x-10">
-          <Link href="/about" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
+          <Link href="#about" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
             About
+          </Link>
+          <Link href="#Roadmap" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
+            Roadmap
+          </Link>
+          <Link href="#Team" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
+            Team
           </Link>
           <Link href="/contact" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
             Our Mine
