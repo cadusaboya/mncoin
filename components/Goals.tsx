@@ -2,7 +2,7 @@
 
 const Goals = () => {
   return (
-    <div className="bg-purple-200 md:rounded-full pb-10 pt-5 mx-8 border-2 border-purple-900">
+    <div className="bg-purple-200 pb-2 pt-5 mx-8 border-2 border-purple-900 xl:rounded-full">
         <h1 className="flex justify-center text-4xl md:text-4xl font-extrabold text-purple-900">How does it work?</h1>
         <div className="flex flex-col md:flex-row items-stretch justify-between space-y-5 md:space-y-0 md:space-x-5 px-4 md:px-24 mt-5">
             <div className="flex-1 bg-white p-5 rounded-lg border-2 border-purple-900">
@@ -30,6 +30,7 @@ const Goals = () => {
                 </p>
             </div>
         </div>
+        <h1 className="flex justify-center text-4xl underline pt-5 md:text-4xl font-extrabold text-purple-900">Read whitepaper</h1>
     </div>
   );
 };
