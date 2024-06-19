@@ -20,7 +20,7 @@ const Header = () => {
           <Link href="#about" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
             About
           </Link>
-          <Link href="#Roadmap" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
+          <Link href="#roadmap" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
             Roadmap
           </Link>
           <Link href="#Team" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
