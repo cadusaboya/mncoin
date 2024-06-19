@@ -4,7 +4,7 @@ const Goals = () => {
   return (
     <div className="bg-purple-200 pb-2 pt-5 mx-8 border-2 border-purple-900 xl:rounded-full">
         <h1 className="flex justify-center text-4xl md:text-4xl font-extrabold text-purple-900">How does it work?</h1>
-        <div className="flex flex-col md:flex-row items-stretch justify-between space-y-5 md:space-y-0 md:space-x-5 px-4 md:px-24 mt-5">
+        <div className="flex flex-col md:flex-row items-stretch justify-center space-y-5 md:space-y-0 md:space-x-5 px-4 md:px-24 mt-5">
             <div className="flex-1 bg-white p-5 rounded-lg border-2 border-purple-900">
                 <h1 className="text-2xl font-extrabold text-purple-900">Mine</h1>
                 <p className="text-xl mt-2 text-purple-800 text-justify">
@@ -30,7 +30,7 @@ const Goals = () => {
                 </p>
             </div>
         </div>
-        <h1 className="flex justify-center text-4xl underline pt-5 md:text-4xl font-extrabold text-purple-900">Read whitepaper</h1>
+        <h1 className="flex justify-center text-4xl underline pt-5 md:text-4xl font-extrabold text-purple-900">Whitepaper soon</h1>
     </div>
   );
 };
