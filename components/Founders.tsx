@@ -18,7 +18,7 @@ const Founders = () => {
                     <h1 className="text-l text-center font-extrabold text-purple-900">Founder / Dev</h1>
                     <a href="https://www.linkedin.com/in/carlossaboya/" target="_blank" rel="noopener noreferrer" className="mr-1"><FaLinkedin color="#0072B1" className="w-6 h-6" /></a>
                     <p className="text-xl mt-4 text-purple-800 text-center px-2 mb-5">
-                    Been around Web3 for the past 3 years. I am a full stack developer and own 2 other companies, decided this year to finally build something in web3
+                    Been around Web3 for the past 3 years. I am a software engineer and own 2 other companies, decided this year to finally build something in web3
                     </p>
                 </div>
                 <div className="flex-1 p-5 rounded-full border-4 border-purple-900 flex flex-col items-center">
