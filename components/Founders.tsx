@@ -32,7 +32,7 @@ const Founders = () => {
                     <h1 className="text-2xl text-center font-extrabold text-purple-900">Fabian Stradella</h1>
                     <h1 className="text-l text-center font-extrabold text-purple-900">Founder</h1>
                     <p className="text-xl mt-10 text-purple-800 text-center px-2 mb-5">
-                        Argentinian living in Brazil for the past X years. Has been in the mining industry for X years and is the owner of Carbomil, the mine to be tokenized"
+                        Argentinian living in Brazil for the past X years. Has been in the mining industry for X years and owner of Carbomil, the mine to be tokenized
                     </p>
                 </div>
                 <div className="flex-1 p-5 rounded-full border-4 border-purple-900 flex flex-col items-center">
@@ -46,7 +46,7 @@ const Founders = () => {
                     <h1 className="text-2xl text-center font-extrabold text-purple-900">Person Name</h1>
                     <h1 className="text-l text-center font-extrabold text-purple-900">Person Role</h1>
                     <p className="text-xl mt-10 text-purple-800 text-center px-2 mb-5">
-                        Leaving this as a sample as we'll probably need more persons in the team.
+                        Leaving this as a sample as we&apos;ll probably need more persons in the team.
                     </p>
                 </div>
             </div>

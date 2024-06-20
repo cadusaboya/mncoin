@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +14,12 @@ const Header = () => {
   return (
     <header className="fixed z-50 bg-white flex items-center w-full h-16 px-4">
       <div className="flex-shrink-0">
-        <img src="/mnlogo.png" alt="Logo" className="h-12" />
+        <Image
+          src="/mnlogo.png"
+          alt="MnCoin Logo"
+          width={12}
+          height={12}
+        />
       </div>
       <div className="absolute left-1/2 transform -translate-x-1/2 flex justify-center">
         <nav className="hidden md:flex space-x-10">

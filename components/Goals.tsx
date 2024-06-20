@@ -40,7 +40,7 @@ const Goals = () => {
                     <CardDescription>Sell</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p>We sell our ore mined to the local and the international market. We'll use our hub to accelerate sales.</p>
+                    <p>We sell our ore mined to the local and the international market. We&apos;ll use our hub to accelerate sales.</p>
                 </CardContent>
                 <CardFooter>
                     <p>Learn more about our mine here.</p>

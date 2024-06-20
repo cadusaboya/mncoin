@@ -22,7 +22,7 @@ export function DialogDemo() {
         <DialogHeader>
           <DialogTitle>Whitepaper not out yet</DialogTitle>
           <DialogDescription>
-            Don't worry, register to our waiting list and be the first to know when new info is out.
+            Don&apos;t worry, register to our waiting list and be the first to know when new info is out.
             </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
