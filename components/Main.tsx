@@ -9,7 +9,10 @@ const Main = () => {
         <p className="text-center lg:text-justify mt-2 lg:text-lg text-purple-800 lg:pr-10">
           MnCoin is a decentralized Manganese Ore Mine powered by blockchain technology. Our mission is to open investments in the ore mining sector to the average investor and also create a hub for buyers and sellers to trade Manganese safely.
         </p>
-        <DialogDemo />
+        <div className="flex justify-center lg:justify-start">
+          <DialogDemo />
+        </div>
+        
       </div>
       <div className="flex-1 px-8">
         {/* Placeholder for Image or Video */}
