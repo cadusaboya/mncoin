@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Main from "@/components/Main";
 import Goals from "@/components/Goals";
 import Roadmap from "@/components/Roadmap";
+import Founders from "@/components/Founders";
 
 export default function Home() {
   return (
@@ -20,6 +21,10 @@ export default function Home() {
 
         <section id="roadmap" className="mt-10">
           <Roadmap />
+        </section>
+
+        <section id="team" className="mt-10">
+          <Founders />
         </section>
       </main>
   );
