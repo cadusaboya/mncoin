@@ -17,8 +17,8 @@ const Header = () => {
         <Image
           src="/mnlogo.png"
           alt="MnCoin Logo"
-          width={12}
-          height={12}
+          width={100}
+          height={100}
         />
       </div>
       <div className="absolute left-1/2 transform -translate-x-1/2 flex justify-center">
