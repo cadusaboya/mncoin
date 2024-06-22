@@ -1,5 +1,8 @@
+"use client"
+
 import Image from 'next/image';
 import { DialogDemo } from './Dialog';
+import  { CarouselPlugin }  from './Carousel';
 
 const Main = () => {
   return (
@@ -16,13 +19,7 @@ const Main = () => {
       </div>
       <div className="flex-1 px-8">
         {/* Placeholder for Image or Video */}
-        <Image
-          src="/mina-placeholder.jpg"
-          alt="Main Image"
-          width={1200}
-          height={300}
-          className="rounded-lg shadow-lg"
-        />
+        <CarouselPlugin />
         {/* If you decide to use a video, you can replace the above Image component with the below video tag */}
         {/* <video
           src="/placeholder-video.mp4"
