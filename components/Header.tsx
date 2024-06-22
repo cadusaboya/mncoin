@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react';
+import { Link as ScrollLink } from 'react-scroll';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -12,7 +13,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed z-50 bg-white flex items-center w-full h-16 px-4">
+    <header className="fixed z-50 bg-white flex items-center w-screen h-16 px-4">
       <div className="flex-shrink-0">
         <Image
           src="/mnlogo.png"
@@ -21,23 +22,47 @@ const Header = () => {
           height={100}
         />
       </div>
-      <div className="absolute left-1/2 transform -translate-x-1/2 flex justify-center">
+      <div className="flex w-full justify-center items-center pr-24">
         <nav className="hidden md:flex space-x-10">
-          <Link href="#about" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
-            About
-          </Link>
-          <Link href="#roadmap" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
-            Roadmap
-          </Link>
-          <Link href="#team" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
-            Team
-          </Link>
-          <Link href="/mine" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
-            Our Mine
-          </Link>
-          <Link href="/contact" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
-            Contact Us
-          </Link>
+          <ScrollLink
+          activeClass="active"
+          to="about"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+          className="cursor-pointer px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100"
+        >
+          About
+        </ScrollLink>
+        <ScrollLink
+          activeClass="active"
+          to="roadmap"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+          className="cursor-pointer px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100"
+        >
+          Roadmap
+        </ScrollLink>
+        <ScrollLink
+          activeClass="active"
+          to="team"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+          className="cursor-pointer px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100"
+        >
+          Team
+        </ScrollLink>
+        <Link href="/mine" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
+          Our Mine
+        </Link>
+        <Link href="/contact" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
+          Contact Us
+        </Link>
         </nav>
       </div>
       <div className="flex md:hidden ml-auto">
@@ -49,15 +74,45 @@ const Header = () => {
       </div>
       {isMenuOpen && (
         <div className="absolute top-16 right-0 left-0 bg-white flex flex-col items-center space-y-2 md:hidden">
-          <Link href="/about" className="px-2 py-1 text-purple-800 font-semibold rounded hover:bg-gray-100">
-            About
-          </Link>
-          <Link href="/contact" className="px-2 py-1 text-purple-800 font-semibold rounded hover:bg-gray-100">
-            Contact Us
-          </Link>
-          <Link href="/mine" className="px-2 py-1 text-purple-800 font-semibold rounded hover:bg-gray-100">
-            Our Mine
-          </Link>
+        <ScrollLink
+          activeClass="active"
+          to="about"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+          className="cursor-pointer px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100"
+        >
+          About
+        </ScrollLink>
+        <ScrollLink
+          activeClass="active"
+          to="roadmap"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+          className="cursor-pointer px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100"
+        >
+          Roadmap
+        </ScrollLink>
+        <ScrollLink
+          activeClass="active"
+          to="team"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+          className="cursor-pointer px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100"
+        >
+          Team
+        </ScrollLink>
+        <Link href="/mine" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
+          Our Mine
+        </Link>
+        <Link href="/contact" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
+          Contact Us
+        </Link>
         </div>
       )}
     </header>
