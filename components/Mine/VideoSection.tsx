@@ -1,10 +1,10 @@
-import YouTubeEmbed from './YouTubeEmbed';
+import YoutubeVid from './YoutubeEmbed';
 
 const VideoSection = () => {
   return (
     <div className="flex flex-col px-4 lg:px-24 lg:items-center justify-center lg:flex-row">
       <div className="flex-1">
-        <YouTubeEmbed videoId="VU3F018_l3s" />
+        <YoutubeVid />
       </div>
       <div className="flex-1 lg:pl-24 mt-5 lg:mt-0">
         <h1 className="text-lg md:text-xl font-extrabold text-gray-600">
