@@ -1,5 +1,5 @@
 import HeaderOthers from "@/components/Mine/HeaderOthers";
-import Main from "@/components/Mine/Main_Mine";
+import MainMine from "@/components/Mine/Main_Mine";
 import VideoSection from "@/components/Mine/VideoSection";
 import Location from "@/components/Mine/Location";
 import FAQ from "@/components/Mine/FAQ";
@@ -16,7 +16,7 @@ export default function Home() {
       </header>
       
         <section className="pt-16">
-          <Main />
+          <MainMine />
         </section>
 
         <section className="pt-16">

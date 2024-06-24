@@ -1,4 +1,4 @@
-const Main = () => {
+const MainMine = () => {
   return (
     <div className="flex items-center justify-between">
       <div className="flex-1 bg-gray-600 py-16 md:py-32">
@@ -13,4 +13,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainMine;
