@@ -32,7 +32,7 @@ const ContactForm = () => {
 
   return (
     <div className="flex justify-center mt-2">
-      <form className="w-full max-w-md" onSubmit={handleSubmit(onSubmit)}>
+      <form className="w-full max-w-md mx-4" onSubmit={handleSubmit(onSubmit)}>
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name"> {/* Added label and input for name */}
             Your Name
