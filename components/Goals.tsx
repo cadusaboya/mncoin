@@ -26,11 +26,8 @@ const Goals = () => {
                     <CardDescription>Mine</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p>Our Ore Mine has a capacity to mine in average X tons of Manganese Ore per month. </p>
+                    <p>Our Ore Mine has a capacity to mine in average 5 thousand metric tons of Manganese Ore per month. </p>
                 </CardContent>
-                <CardFooter>
-                    <p>Learn more about our mine here.</p>
-                </CardFooter>
             </Card>
             </div>
             <div className="flex-1">
@@ -42,9 +39,6 @@ const Goals = () => {
                 <CardContent>
                     <p>We sell our ore mined to the local and the international market. We&apos;ll use our hub to accelerate sales.</p>
                 </CardContent>
-                <CardFooter>
-                    <p>Learn more about our mine here.</p>
-                </CardFooter>
             </Card>
             </div>
             <div className="flex-1">
@@ -56,9 +50,6 @@ const Goals = () => {
                 <CardContent>
                     <p>We use 100% of the profit to buy tokens using a strategy to avoid market manipulation.</p>
                 </CardContent>
-                <CardFooter>
-                    <p>Learn more about our mine here.</p>
-                </CardFooter>
             </Card>
             </div>
             <div className="flex-1">
@@ -70,9 +61,6 @@ const Goals = () => {
                 <CardContent>
                     <p>We burn 100% of the tokens bought on buybacks, increasing the value per token in a never ending cycle</p>
                 </CardContent>
-                <CardFooter>
-                    <p>Learn more about our mine here.</p>
-                </CardFooter>
             </Card>
             </div>
             <div className="flex-1">
@@ -84,9 +72,6 @@ const Goals = () => {
                 <CardContent>
                     <p>We publish biweekly reports on our discord and social media to keep investors informed.</p>
                 </CardContent>
-                <CardFooter>
-                    <p>Learn more about our mine here.</p>
-                </CardFooter>
             </Card>
             </div>
         </div>

@@ -18,7 +18,7 @@ const VideoSection = () => {
           Leaders in the mining and tech fields
         </h1>
         <p className="mt-1 text-gray-600">
-          Our founders consist of a team of mining experts and tech entrepreneurs. We have a combined experience of over 50 years in the mining industry and have been involved in the development of blockchain technology for over a decade.
+          Our founders consist of a team of mining experts and tech entrepreneurs. We have a combined experience of over 25 years in the mining industry and have been involved in blockchain technology for the past 5 years.
         </p>
       </div>
     </div>

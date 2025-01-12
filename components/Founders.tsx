@@ -30,23 +30,23 @@ const Founders = () => {
                         className="rounded-full border-2 border-purple-900"
                     />
                     <h1 className="text-2xl text-center font-extrabold text-purple-900">Fabian Stradella</h1>
-                    <h1 className="text-l text-center font-extrabold text-purple-900">Founder</h1>
+                    <h1 className="text-l text-center font-extrabold text-purple-900">Founder / Mine Owner</h1>
                     <p className="text-xl mt-10 text-purple-800 text-center px-2 mb-5">
                         Argentinian living in Brazil for the past X years. Has been in the mining industry for X years and owner of Carbomil, the mine to be tokenized
                     </p>
                 </div>
                 <div className="flex-1 p-5 rounded-full border-4 border-purple-900 flex flex-col items-center">
                     <Image
-                        src="/profile-ph.png"
+                        src="/engCons.jpeg"
                         alt="Roadmap Image"
                         width={150}
                         height={150}
                         className="rounded-full border-2 border-purple-900"
                     />
                     <h1 className="text-2xl text-center font-extrabold text-purple-900">Person Name</h1>
-                    <h1 className="text-l text-center font-extrabold text-purple-900">Person Role</h1>
+                    <h1 className="text-l text-center font-extrabold text-purple-900">Environmental Consultant</h1>
                     <p className="text-xl mt-10 text-purple-800 text-center px-2 mb-5">
-                        Leaving this as a sample as we&apos;ll probably need more persons in the team.
+                        Environmental Consultant specialized in Geoprocessing Applications and Evaluation, Expertise, and Auditing of Engineering Works with over 10 years of experience in mining.
                     </p>
                 </div>
             </div>
