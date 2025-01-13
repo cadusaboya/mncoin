@@ -26,7 +26,7 @@ const Goals = () => {
                     <CardDescription>Mine</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p>Our Ore Mine has a capacity to mine in average 5 thousand metric tons of Manganese Ore per month. </p>
+                    <p>Our Ore Mine has a capacity to mine in average 5 thousand tons of Manganese Ore per month. </p>
                 </CardContent>
             </Card>
             </div>

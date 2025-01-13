@@ -5,7 +5,7 @@ const Founders = () => {
     return (
         <div className="pb-2 pt-5 mx-8 flex flex-col items-center">
             <h1 className="flex justify-center text-4xl md:text-4xl font-extrabold text-purple-900">Meet the Team</h1>
-            <div className="flex flex-col md:flex-row items-stretch justify-center space-y-5 md:space-y-0 md:space-x-5 px-4 md:px-24 xl:px-72 mt-5">
+            <div className="flex flex-col md:flex-row items-stretch justify-center space-y-5 md:space-y-0 md:space-x-5 px-4 md:px-12 xl:px-36 mt-5">
                 <div className="flex-1 p-5 rounded-full border-4 border-purple-900 flex flex-col items-center">
                     <Image
                         src="/my-img.jpeg"
@@ -32,7 +32,7 @@ const Founders = () => {
                     <h1 className="text-2xl text-center font-extrabold text-purple-900">Fabian Stradella</h1>
                     <h1 className="text-l text-center font-extrabold text-purple-900">Founder / Mine Owner</h1>
                     <p className="text-xl mt-10 text-purple-800 text-center px-2 mb-5">
-                        Argentinian living in Brazil for the past X years. Has been in the mining industry for X years and owner of Carbomil, the mine to be tokenized
+                        Argentinian living in Brazil for the past 27 years. Has been in the mining industry for 9 years and owner of Eagle, mine to be tokenized
                     </p>
                 </div>
                 <div className="flex-1 p-5 rounded-full border-4 border-purple-900 flex flex-col items-center">
@@ -43,10 +43,24 @@ const Founders = () => {
                         height={150}
                         className="rounded-full border-2 border-purple-900"
                     />
-                    <h1 className="text-2xl text-center font-extrabold text-purple-900">Person Name</h1>
+                    <h1 className="text-2xl text-center font-extrabold text-purple-900">Rafael Souza</h1>
                     <h1 className="text-l text-center font-extrabold text-purple-900">Environmental Consultant</h1>
                     <p className="text-xl mt-10 text-purple-800 text-center px-2 mb-5">
-                        Environmental Consultant specialized in Geoprocessing Applications and Evaluation, Expertise, and Auditing of Engineering Works with over 10 years of experience in mining.
+                        Specialized in Geoprocessing Applications and Evaluation, Expertise, and Auditing of Engineering Works with over 10 years of experience in mining.
+                    </p>
+                </div>
+                <div className="flex-1 p-5 rounded-full border-4 border-purple-900 flex flex-col items-center">
+                    <Image
+                        src="/bCruz.png"
+                        alt="Roadmap Image"
+                        width={150}
+                        height={150}
+                        className="rounded-full border-2 border-purple-900"
+                    />
+                    <h1 className="text-2xl text-center font-extrabold text-purple-900">Bruno Cruz</h1>
+                    <h1 className="text-l text-center font-extrabold text-purple-900">Geologist</h1>
+                    <p className="text-xl mt-10 text-purple-800 text-center px-2 mb-5">
+                    Specialist in Mineral Resources with 2 MBAs in Project Management and Production Engineering
                     </p>
                 </div>
             </div>
