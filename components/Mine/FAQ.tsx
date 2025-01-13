@@ -15,7 +15,7 @@ import {
                 <AccordionItem value="item-1">
                 <AccordionTrigger>1. Is this a legal Manganese Ore Mine?</AccordionTrigger>
                 <AccordionContent>
-                Yes. Carbomil currently operates in compliance with all legal documents it needs to mine and sell the ore. We are providing documentation to all potential investors, soon all this info will be available on the whitepaper.
+                Yes. Eagle currently operates in compliance with all legal documents it needs to mine and sell the ore. We are providing documentation to all potential investors, soon all this info will be available on the whitepaper.
                 </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">

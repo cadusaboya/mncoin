@@ -23,7 +23,7 @@ const Location = () => {
             <div className="flex-1 flex flex-col justify-end">
                 <h1 className="text-xl font-extrabold text-gray-600 pt-10 lg:pt-36 lg:ml-12">Strategic Position</h1>
                 <p className="mt-1 text-gray-600 lg:ml-12">
-                Overall, Marabá&apos;s strategic location enhances Carbomil&apos;s capacity to be a leading manganese ore mining and export company, promising significant economic benefits and a competitive edge in the global market.
+                Overall, Marabá&apos;s strategic location enhances Eaglel&apos;s capacity to be a leading manganese ore mining and export company, promising significant economic benefits and a competitive edge in the global market.
                 </p>
             </div>
         </div>
