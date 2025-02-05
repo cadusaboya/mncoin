@@ -70,7 +70,7 @@ const Goals = () => {
                     <CardDescription>Scale</CardDescription>
                 </CardHeader>
                 <CardContent>
-                <p className="text-justify"> We can scale our operations to up monthly production or search for new deposits in Eagle's vast 3,000-ha area. </p>
+                <p className="text-justify"> We can scale our operations to up monthly production or search for new deposits in Eagle&apos;s vast 3,000-ha area. </p>
                 </CardContent>
             </Card>
             </div>
