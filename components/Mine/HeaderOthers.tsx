@@ -15,7 +15,7 @@ const HeaderOthers = () => {
     <header className="fixed z-50 bg-white flex items-center w-screen h-16 px-4">
       <div className="flex-shrink-0">
         <Image
-          src="/mnlogo.png"
+          src="/mnttext.png"
           alt="MnCoin Logo"
           width={100}
           height={100}
