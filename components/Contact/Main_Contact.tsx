@@ -14,7 +14,7 @@ const MainContact = () => {
         </p>
         <div className="flex items-center justify-center mt-1">
         <Button variant="outline" className="mt-2 shadow-sm" asChild>
-          <Link href="https://discord.gg/KvZR7AHH" target="_blank" rel="noopener noreferrer"><FaDiscord className="w-6 h-6 mr-2" />Join our Discord</Link>
+          <Link href="https://discord.gg/K5Tcw2NbXU" target="_blank" rel="noopener noreferrer"><FaDiscord className="w-6 h-6 mr-2" />Join our Discord</Link>
         </Button>
         </div>     
       </div>
