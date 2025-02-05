@@ -11,7 +11,7 @@ const teamMembers = [
     },
     {
         name: "Fabian Stradella",
-        role: "Founder / Mine Owner",
+        role: "Founder / Eagle Owner & CEO",
         img: "/fabian.jpg",
         description: "Argentinian living in Brazil for the past 27 years. Has been in the mining industry for 9 years and owner of Eagle, mine to be tokenized."
     },
