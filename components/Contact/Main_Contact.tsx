@@ -9,7 +9,7 @@ const MainContact = () => {
         <h1 className="text-center text-3xl md:text-5xl font-bold text-gray-600">
           Want to know more?
         </h1>
-        <p className="text-center text-gray-600 mt-2 md:mt-5 px-6 md:px-20 lg:px-40 xl:px-80">  
+        <p className="text-center text-gray-600 mt-2 md:mt-5 px-6 md:px-20 lg:px-40 xl:px-80 text-justify">  
           We are here to help you, wether you&apos;re interested in joining early funding rounds or you want to learn more about the mine current operations. Contact us and we will get back to you as soon as possible to schedule a meeting.
         </p>
         <div className="flex items-center justify-center mt-1">

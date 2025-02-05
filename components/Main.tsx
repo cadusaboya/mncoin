@@ -1,6 +1,6 @@
 "use client"
 
-import { DialogDemo } from './Dialog';
+import { Button } from "@/components/ui/button"
 import  { CarouselPlugin }  from './Carousel';
 
 const Main = () => {
@@ -9,10 +9,14 @@ const Main = () => {
       <div className="flex-1 mb-8 lg:mb-0 md:mr-8 px-20">
         <h1 className="text-center lg:text-left text-4xl lg:text-6xl font-extrabold text-purple-900">The future of Manganese is now</h1>
         <p className="text-center lg:text-justify mt-2 lg:text-lg text-purple-800 lg:pr-10">
-          MnCoin is a decentralized Manganese Ore Mine powered by blockchain technology. Our mission is to open investments in the ore mining sector to the average investor and also create a hub for buyers and sellers to trade Manganese safely.
+          MNToken is a decentralized Manganese Ore Mine powered by blockchain technology. Our mission is to open investments in the ore mining sector to the average investor and also create a hub for buyers and sellers to trade Manganese safely.
         </p>
         <div className="flex justify-center lg:justify-start">
-          <DialogDemo />
+        <a href="https://mntoken.gitbook.io/docs" target="_blank" rel="noopener noreferrer">
+          <Button variant="outline" className="mt-2 shadow-sm">
+            Read Whitepaper
+          </Button>
+        </a>
         </div>
         
       </div>

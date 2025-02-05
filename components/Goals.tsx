@@ -6,7 +6,7 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
-  import { FaBurn } from "react-icons/fa";
+  import { GrMoney } from "react-icons/gr";
   import { BsMinecartLoaded } from "react-icons/bs";
   import { TbMoneybag } from "react-icons/tb";
   import { AiOutlineRise } from "react-icons/ai";
@@ -26,7 +26,7 @@ const Goals = () => {
                     <CardDescription>Mine</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p>Our Ore Mine has a capacity to mine in average 5 thousand tons of Manganese Ore per month. </p>
+                    <p className="text-justify">Our operations can mine in average 5,000 metric tons of Manganese Ore per month for the next 50 years. </p>
                 </CardContent>
             </Card>
             </div>
@@ -37,29 +37,18 @@ const Goals = () => {
                     <CardDescription>Sell</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p>We sell our ore mined to the local and the international market. We&apos;ll use our hub to accelerate sales.</p>
+                <p className="text-justify h-36">We sell monthly to the local and international market. We&apos;ll accept $MNT or USD as payment.</p>
                 </CardContent>
             </Card>
             </div>
             <div className="flex-1">
             <Card>
                 <CardHeader>
-                    <CardTitle><AiOutlineRise className="w-8 h-8" /></CardTitle>
-                    <CardDescription>Buybacks</CardDescription>
+                    <CardTitle><GrMoney color="#ff0000" className="w-8 h-8" /></CardTitle>
+                    <CardDescription>Burn & Profit</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p>We use 100% of the profit to buy tokens using a strategy to avoid market manipulation.</p>
-                </CardContent>
-            </Card>
-            </div>
-            <div className="flex-1">
-            <Card>
-                <CardHeader>
-                    <CardTitle><FaBurn color="#ff0000" className="w-8 h-8" /></CardTitle>
-                    <CardDescription>Burn</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <p>We burn 100% of the tokens bought on buybacks, increasing the value per token in a never ending cycle</p>
+                <p className="text-justify">We burn 100% of the tokens received from sales, increasing the value per token or share the profits with token holders</p>
                 </CardContent>
             </Card>
             </div>
@@ -70,7 +59,18 @@ const Goals = () => {
                     <CardDescription>Reports</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p>We publish biweekly reports on our discord and social media to keep investors informed.</p>
+                <p className="text-justify h-36">We publish biweekly reports on our discord and social media to keep investors informed.</p>
+                </CardContent>
+            </Card>
+            </div>
+            <div className="flex-1">
+            <Card>
+                <CardHeader>
+                    <CardTitle><AiOutlineRise className="w-8 h-8" /></CardTitle>
+                    <CardDescription>Scale</CardDescription>
+                </CardHeader>
+                <CardContent>
+                <p className="text-justify"> We can scale our operations to up monthly production or search for new deposits in Eagle's vast 3,000-ha area. </p>
                 </CardContent>
             </Card>
             </div>

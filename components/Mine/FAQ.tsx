@@ -11,7 +11,7 @@ import {
         <h1 className="text-2xl md:text-3xl lg:text-4xl text-center font-extrabold text-gray-600 mt-5">
             Frequently Asked Questions
         </h1>
-            <Accordion type="single" collapsible className="mt-5 text-gray-600">
+            <Accordion type="single" collapsible className="mt-5 text-gray-600 text-justify">
                 <AccordionItem value="item-1">
                 <AccordionTrigger>1. Is this a legal Manganese Ore Mine?</AccordionTrigger>
                 <AccordionContent>
@@ -29,18 +29,6 @@ import {
                 <AccordionContent>
                 We are doxxing and our tokens will all be vested in a smart contract that will be released 
                 in stages. This ensures that the team will keep working for the project to succeed long term.
-                </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-4">
-                <AccordionTrigger>4. Placeholder Question</AccordionTrigger>
-                <AccordionContent>
-                This is a placeholder answer.
-                </AccordionContent>
-                </AccordionItem>
-                <AccordionItem value="item-5">
-                <AccordionTrigger>5. Placeholder Question</AccordionTrigger>
-                <AccordionContent>
-                This is a placeholder answer.
                 </AccordionContent>
                 </AccordionItem>
             </Accordion>
