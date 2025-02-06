@@ -70,7 +70,7 @@ const Header = () => {
 
       {/* Mobile Menu Toggle */}
       <div className="flex md:hidden ml-auto">
-        <button onClick={toggleMenu} className="text-purple-800 focus:outline-none">
+        <button onClick={toggleMenu} className="text-gray-300 focus:outline-none">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
@@ -79,7 +79,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="absolute top-16 right-0 left-0 bg-white flex flex-col items-center space-y-2 md:hidden py-4">
+        <div className="absolute top-16 right-0 left-0 bg-black opacity-85 flex flex-col items-center space-y-2 md:hidden py-4">
           <ScrollLink
             activeClass="active"
             to="about"
@@ -87,7 +87,7 @@ const Header = () => {
             smooth={true}
             offset={-70}
             duration={500}
-            className="cursor-pointer px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100"
+            className="cursor-pointer px-2 py-1 text-gray-100 font-semibold rounded hover:bg-gray-900"
           >
             About
           </ScrollLink>
@@ -98,7 +98,7 @@ const Header = () => {
             smooth={true}
             offset={-70}
             duration={500}
-            className="cursor-pointer px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100"
+            className="cursor-pointer px-2 py-1 text-gray-100 font-semibold rounded hover:bg-gray-900"
           >
             Roadmap
           </ScrollLink>
@@ -109,18 +109,14 @@ const Header = () => {
             smooth={true}
             offset={-70}
             duration={500}
-            className="cursor-pointer px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100"
+            className="cursor-pointer px-2 py-1 text-gray-100 font-semibold rounded hover:bg-gray-900"
           >
             Team
           </ScrollLink>
-          <Link href="/mine" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
-            Our Mine
-          </Link>
-          <Link href="/contact">
-            <button className="px-4 py-2 bg-white gray-100 font-semibold rounded-lg shadow-md hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75">
-              Contact Us
-            </button>
-          </Link>
+
+          <Button variant="outline" className="shadow-md px-2" asChild>
+           <Link href="/contact" target="_blank" rel="noopener noreferrer">Contact Us</Link>
+          </Button>
         </div>
       )}
     </header>
