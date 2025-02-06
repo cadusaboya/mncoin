@@ -25,7 +25,7 @@ const Main = () => {
         </div>
         
       </div>
-      <div className="flex-1 px-8">
+      <div className="flex-1 px-8 pt-12">
         {/* Placeholder for Image or Video */}
         <CarouselPlugin />
         {/* If you decide to use a video, you can replace the above Image component with the below video tag */}

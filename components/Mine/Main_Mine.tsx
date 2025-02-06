@@ -5,7 +5,7 @@ const MainMine = () => {
         <div className="text-center text-l md:text-xl font-sarif text-white">
           EAGLE
         </div>
-        <h1 className="text-center text-4xl md:text-6xl font-sarif text-white px-60 mt-5">
+        <h1 className="text-center text-4xl md:text-6xl font-sarif text-white lg:px-60 mt-5">
           Sustainable manganese mining with innovative tokenized investments
         </h1>
         <p className="text-center text-white mt-6 md:mt-10 px-6 md:px-20 lg:px-40 xl:px-80 text-gray-100 opacity-75"> 
