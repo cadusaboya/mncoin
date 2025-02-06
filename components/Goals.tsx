@@ -17,7 +17,7 @@ import {
 const Goals = () => {
   return (
     <div className=" pb-2 pt-5 mx-8">
-        <h1 className="flex justify-center text-4xl md:text-4xl font-extrabold text-purple-900">How does it work?</h1>
+        <h1 className="flex justify-center text-4xl md:text-4xl text-white font-serif">Become a part of it</h1>
         <div className="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-10 px-4 md:px-44 mt-5">
             <div className="flex-1">
             <Card>
@@ -45,7 +45,7 @@ const Goals = () => {
             <Card>
                 <CardHeader>
                     <CardTitle><GrMoney color="#ff0000" className="w-8 h-8" /></CardTitle>
-                    <CardDescription>Burn & Profit</CardDescription>
+                    <CardDescription>Earn</CardDescription>
                 </CardHeader>
                 <CardContent>
                 <p className="text-justify">We burn 100% of the tokens received from sales, increasing the value per token or share the profits with token holders</p>

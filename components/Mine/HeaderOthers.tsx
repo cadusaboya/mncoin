@@ -12,25 +12,19 @@ const HeaderOthers = () => {
   };
 
   return (
-    <header className="fixed z-50 bg-white flex items-center w-screen h-16 px-4">
+    <header className="fixed z-50 bg-black flex items-center w-screen h-16 px-4 opacity-85">
       <div className="flex-shrink-0">
         <Image
           src="/mnttext.png"
           alt="MnCoin Logo"
-          width={100}
-          height={100}
+          width={150}
+          height={150}
         />
       </div>
       <div className="flex w-full justify-center items-center pr-24">
         <nav className="hidden md:flex space-x-10">
-        <Link href="/" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
+        <Link href="/" className="px-2 py-1 text-gray-100 font-semibold rounded hover:bg-gray-900">
           Main Page
-        </Link>
-        <Link href="/mine" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
-          Our Mine
-        </Link>
-        <Link href="/contact" className="px-2 py-1 text-purple-900 font-semibold rounded hover:bg-gray-100">
-          Contact Us
         </Link>
         </nav>
       </div>
