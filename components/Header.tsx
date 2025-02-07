@@ -38,6 +38,39 @@ const Header = () => {
           </ScrollLink>
           <ScrollLink
             activeClass="active"
+            to="operations"
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+            className="cursor-pointer px-2 py-1 text-gray-100 font-semibold rounded hover:bg-gray-900"
+          >
+            Operations
+          </ScrollLink>
+          <ScrollLink
+            activeClass="active"
+            to="eagle"
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+            className="cursor-pointer px-2 py-1 text-gray-100 font-semibold rounded hover:bg-gray-900"
+          >
+            Mine
+          </ScrollLink>
+          <ScrollLink
+            activeClass="active"
+            to="location"
+            spy={true}
+            smooth={true}
+            offset={-70}
+            duration={500}
+            className="cursor-pointer px-2 py-1 text-gray-100 font-semibold rounded hover:bg-gray-900"
+          >
+            Location
+          </ScrollLink>
+          <ScrollLink
+            activeClass="active"
             to="roadmap"
             spy={true}
             smooth={true}

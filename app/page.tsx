@@ -23,11 +23,11 @@ export default function Home() {
           <Main />
         </section>
 
-        <section className="py-10 bg-purple-950">
+        <section id="operations" className="py-10 bg-purple-950">
           <Goals />
         </section>        
 
-        <section className="bg-gray-900">
+        <section id="eagle" className="bg-gray-900">
           <MainMine />
         </section>
 
@@ -35,7 +35,7 @@ export default function Home() {
           <VideoSection />
         </section>
 
-        <section className="bg-gray-900">
+        <section id="location" className="bg-gray-900">
           <Location />
         </section>
         
