@@ -6,6 +6,7 @@ import Founders from "@/components/Founders";
 import MainMine from "@/components/Mine/Main_Mine";
 import VideoSection from "@/components/Mine/VideoSection";
 import Location from "@/components/Mine/Location";
+import Footer from "@/components/footer";
 import FAQ from "@/components/Mine/FAQ";
 import React from 'react';
 
@@ -45,6 +46,8 @@ export default function Home() {
         <section id="team" className="py-10 bg-gray-900">
           <Founders />
         </section>
+
+        < Footer />
       </main>
   );
 }
