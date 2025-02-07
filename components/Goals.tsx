@@ -17,7 +17,7 @@ import {
 const Goals = () => {
   return (
     <div className=" pb-2 pt-5 mx-8">
-        <h1 className="flex justify-center text-4xl md:text-4xl text-white font-serif">Become a part of it</h1>
+        <h1 className="flex text-4xl md:text-5xl text-white font-serif pl-8 pb-4">Become a part of it</h1>
         <div className="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-10 px-4 md:px-44 mt-5">
             <div className="flex-1">
             <Card>
