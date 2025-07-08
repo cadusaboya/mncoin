@@ -14,7 +14,7 @@ const Main = () => {
           MnToken is a decentralized manganese ore mine operations powered by blockchain technology. Our mission is to open investments in the ore mining sector to the average investor and also create a hub for buyers and sellers to trade Manganese safely.
         </p>
         <div className="flex justify-center lg:justify-start">
-        <a href="https://mntoken.gitbook.io/docs" target="_blank" rel="noopener noreferrer">
+        <a href="https://orebit.gitbook.io/docs" target="_blank" rel="noopener noreferrer">
         <Button variant="outline" className="shadow-md px-3 py-6">
           Read Whitepaper
         </Button>
