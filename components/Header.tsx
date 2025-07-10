@@ -15,12 +15,12 @@ const Header = () => {
 
   return (
     <header className="fixed z-50 bg-black flex items-center w-screen h-16 px-4 opacity-85">
-      <div className="flex-shrink-0">
+      <div className="">
         <Image
-          src="/mnttext.png"
-          alt="MnCoin Logo"
-          width={150}
-          height={150}
+          src="/orebitside-nobg.png"
+          alt="Orebit Logo"
+          width={120}
+          height={120}
         />
       </div>
       <div className="flex w-full justify-center items-center pr-24">
@@ -97,7 +97,7 @@ const Header = () => {
       {/* Contact Us Button on the Far Right */}
       <div className="hidden md:flex ml-auto">
         <Button variant="outline" className="shadow-md mr-5 px-3 py-6" asChild>
-          <Link href="/contact" target="_blank" rel="noopener noreferrer">Contact Us</Link>
+          <Link href="https://tx4o9.share.hsforms.com/2guHvYugEQRCbrbASBheHLA" target="_blank" rel="noopener noreferrer">Contact Us</Link>
         </Button>
       </div>
 
@@ -148,7 +148,7 @@ const Header = () => {
           </ScrollLink>
 
           <Button variant="outline" className="shadow-md px-2" asChild>
-           <Link href="/contact" target="_blank" rel="noopener noreferrer">Contact Us</Link>
+           <Link href="https://tx4o9.share.hsforms.com/2guHvYugEQRCbrbASBheHLA" target="_blank" rel="noopener noreferrer">Contact Us</Link>
           </Button>
         </div>
       )}

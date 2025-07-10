@@ -11,71 +11,63 @@ import {
   import { TbMoneybag } from "react-icons/tb";
   import { AiOutlineRise } from "react-icons/ai";
   import { TbReportSearch } from "react-icons/tb";
+  import { FaMountain, FaLock, FaChartLine } from 'react-icons/fa'
 
 
 
 const Goals = () => {
   return (
-    <div className=" pb-2 pt-5 mx-8">
-        <h1 className="flex text-4xl md:text-5xl text-white font-serif pl-8 pb-4">Become a part of it</h1>
-        <div className="flex flex-col md:flex-row justify-center space-y-5 md:space-y-0 md:space-x-10 px-4 md:px-44 mt-5">
-            <div className="flex-1">
-            <Card>
-                <CardHeader>
-                    <CardTitle><BsMinecartLoaded className="w-8 h-8" /></CardTitle>
-                    <CardDescription>Mine</CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-justify">Our operations can mine in average 5,000 metric tons of Manganese Ore per month for the next 50 years. </p>
-                </CardContent>
-            </Card>
-            </div>
-            <div className="flex-1">
-            <Card>
-                <CardHeader>
-                    <CardTitle><TbMoneybag color="#ebeb1f" className="w-8 h-8" /></CardTitle>
-                    <CardDescription>Sell</CardDescription>
-                </CardHeader>
-                <CardContent>
-                <p className="text-justify h-36">We sell monthly to the local and international market. We&apos;ll accept $MNT or USD as payment.</p>
-                </CardContent>
-            </Card>
-            </div>
-            <div className="flex-1">
-            <Card>
-                <CardHeader>
-                    <CardTitle><GrMoney color="#ff0000" className="w-8 h-8" /></CardTitle>
-                    <CardDescription>Earn</CardDescription>
-                </CardHeader>
-                <CardContent>
-                <p className="text-justify">We burn 100% of the tokens received from sales, increasing the value per token or share the profits with token holders</p>
-                </CardContent>
-            </Card>
-            </div>
-            <div className="flex-1">
-            <Card>
-                <CardHeader>
-                    <CardTitle><TbReportSearch className="w-8 h-8" /></CardTitle>
-                    <CardDescription>Reports</CardDescription>
-                </CardHeader>
-                <CardContent>
-                <p className="text-justify h-36">We publish biweekly reports on our discord and social media to keep investors informed.</p>
-                </CardContent>
-            </Card>
-            </div>
-            <div className="flex-1">
-            <Card>
-                <CardHeader>
-                    <CardTitle><AiOutlineRise className="w-8 h-8" /></CardTitle>
-                    <CardDescription>Scale</CardDescription>
-                </CardHeader>
-                <CardContent>
-                <p className="text-justify"> We can scale our operations to up monthly production or search for new deposits in Eagle&apos;s vast 3,000-ha area. </p>
-                </CardContent>
-            </Card>
-            </div>
+    <section className="text-white px-6 md:px-16">
+        <div className="flex flex-col md:flex-row md:justify-between items-center mb-12">
+          <h2 className="text-4xl font-serif md:text-5xl mb-6 md:mb-12">
+            Join the Exclusive <br /> Mining Sector
+          </h2>
+          <hr className="border-t border-black my-12" />
+          <div className="flex mb-24">
+            <a
+            href="https://tx4o9.share.hsforms.com/2guHvYugEQRCbrbASBheHLA"
+            target="_blank"
+            rel="noopener noreferrer"
+            >
+                <button className="bg-white shadow-lg text-black px-8 py-3 rounded-md hover:bg-gray-300 transition">
+                    Join Now
+                </button>
+            </a>
+
+          </div>
         </div>
-    </div>
+
+        <div className="grid md:grid-cols-3 gap-10">
+          {/* Scalable Mining Pools */}
+          <div className="flex flex-col items-start gap-4">
+            <FaMountain className="text-grey-800 text-6xl" />
+            <h3 className="text-2xl">Scalable mine pool <br /> access</h3>
+            <p className="text-gray-300 pr-12">
+            Stake your tokens and earn revenue share from one or more mine pools available across the Orebit ecosystem.
+            </p>
+          </div>
+
+          {/* Transparent and Secure */}
+          <div className="flex flex-col items-start gap-4">
+            <FaLock className="text-grey-800 text-6xl" />
+            <h3 className="text-2xl">Transparent and secure<br />  framework</h3>
+            <p className="text-gray-300 pr-12">
+              Every mine operation is documented on-chain. With full traceability and smart contracts, 
+              your investments are secured and transparently managed.
+            </p>
+          </div>
+
+          {/* Real Returns from Real Assets */}
+          <div className="flex flex-col items-start gap-4">
+            <FaChartLine className="text-grey-800 text-6xl" />
+            <h3 className="text-2xl">Real returns from <br /> real assets</h3>
+            <p className="text-gray-300 pr-12">
+              Orebit transforms manganese production into blockchain-based income. 
+              Earn from actual ore extraction, with options to auto-sell or hold for appreciation.
+            </p>
+          </div>
+        </div>
+    </section>
   );
 };
 

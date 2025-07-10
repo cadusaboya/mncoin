@@ -7,13 +7,13 @@ const teamMembers = [
         role: "Founder / Dev",
         img: "/my-img.jpeg",
         linkedin: "https://www.linkedin.com/in/carlossaboya/",
-        description: "Been around Web3 for the past 3 years. I am a software engineer and own 2 other companies, decided this year to finally build something in Web3."
+        description: "Been around Web3 for the past 5 years. Is a software engineer and own 2 other companies, decided this year to finally build something meaningful in the blockchain."
     },
     {
         name: "Fabian Stradella",
         role: "Founder / Eagle Owner & CEO",
         img: "/fabian.jpg",
-        description: "Argentinian living in Brazil for the past 27 years. Has been in the mining industry for 9 years and owner of Eagle, mine to be tokenized."
+        description: "Argentinian living in Brazil for the past 27 years. Has been in the mining industry for 9 years and Eagle, the first mine on the ecossystem, owner."
     },
     {
         name: "Rafael Souza",

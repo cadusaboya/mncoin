@@ -6,10 +6,10 @@ const MainMine = () => {
           EAGLE
         </div>
         <h1 className="text-center text-4xl md:text-6xl font-sarif text-white lg:px-60 mt-5">
-          Sustainable manganese mining with innovative tokenized investments
+          The first Mine Pool available in the Orebit ecosystem
         </h1>
         <p className="text-center text-white mt-6 md:mt-10 px-6 md:px-20 lg:px-40 xl:px-80 text-gray-100 opacity-75"> 
-        With over a decade of industry leadership, Eagle extracts 5,000 metric tons of manganese monthly using cutting-edge technology and sustainable practices. Now, by embracing asset tokenization, Eagle offers unique investment opportunities while fueling future growth.
+        With over a decade of industry leadership, Eagle can currently extract up to 5,000 metric tons of manganese ore monthly. Now, by embracing our ecossystem, Eagle will be the first of it's kind to offer a unique investment opportunity via our token while fueling future growth.
         </p>
       </div>
     </div>

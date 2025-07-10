@@ -11,7 +11,10 @@ const Main = () => {
       <div className="flex-1 lg:mb-0 md:mr-8 px-8">
         <h1 className="text-center lg:text-left text-6xl lg:text-8xl font-serif text-white">The future of Manganese is now</h1>
         <p className="text-center lg:text-justify mt-2 lg:text-lg opacity-75 text-gray-100 lg:pr-10 py-8">
-          MnToken is a decentralized manganese ore mine operations powered by blockchain technology. Our mission is to open investments in the ore mining sector to the average investor and also create a hub for buyers and sellers to trade Manganese safely.
+        Orebit is building the world’s first blockchain-powered ecosystem backed by real manganese ore extraction. 
+        Our mission is to democratize the mining industry, allowing anyone to invest in this sector without the challenges that usually limit access.
+
+        
         </p>
         <div className="flex justify-center lg:justify-start">
         <a href="https://orebit.gitbook.io/docs" target="_blank" rel="noopener noreferrer">
