@@ -9,7 +9,7 @@ const MainMine = () => {
           The first Mine Pool available in the Orebit ecosystem
         </h1>
         <p className="text-center text-white mt-6 md:mt-10 px-6 md:px-20 lg:px-40 xl:px-80 text-gray-100 opacity-75"> 
-        With over a decade of industry leadership, Eagle can currently extract up to 5,000 metric tons of manganese ore monthly. Now, by embracing our ecossystem, Eagle will be the first of it&apos;s kind to offer a unique investment opportunity via our token while fueling future growth.
+        With over a decade of industry leadership, Eagle can currently extract up to 5,000 metric tons of manganese ore monthly. Now, by embracing our ecossystem, Eagle will be the first of it&apos;s kind to offer an unique investment opportunity via our token while fueling future growth.
         </p>
       </div>
     </div>
