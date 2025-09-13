@@ -1,0 +1,154 @@
+// components/BuyInterface.jsx
+'use client';
+import { useConnection, useWallet } from '@solana/wallet-adapter-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { VersionedTransaction } from '@solana/web3.js';
+import { useState, useEffect } from 'react';
+
+// Componente reutilizável para a barra de progresso
+const ProgressBar = ({ progress }) => (
+  <div style={{ width: '100%', backgroundColor: '#333', borderRadius: '5px', overflow: 'hidden', marginTop: '10px', border: '1px solid #444' }}>
+    <div style={{ width: `${progress}%`, backgroundColor: '#4CAF50', padding: '8px 0', textAlign: 'center', color: 'white', transition: 'width 0.5s ease-in-out', fontWeight: 'bold' }}>
+      {progress.toFixed(2)}%
+    </div>
+  </div>
+);
+
+export const BuyInterface = () => {
+  const { connection } = useConnection();
+  const { publicKey, sendTransaction } = useWallet();
+  const [amount, setAmount] = useState(1000);
+  const [isLoading, setIsLoading] = useState(false);
+  const [status, setStatus] = useState('');
+  const [signature, setSignature] = useState('');
+  const [saleData, setSaleData] = useState(null);
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+    const fetchSaleStatus = async () => {
+      try {
+        const response = await fetch('/api/sale-status');
+        const data = await response.json();
+        if (data.error) throw new Error(data.error);
+        setSaleData(data);
+      } catch (error) {
+        console.error("Falha ao buscar status da venda:", error);
+        setStatus("Não foi possível carregar o estado da venda.");
+      }
+    };
+    fetchSaleStatus();
+    const interval = setInterval(fetchSaleStatus, 30000); // Atualiza a cada 30 segundos
+    return () => clearInterval(interval);
+  }, []);
+
+  const handleBuy = async () => {
+    if (!publicKey) {
+      setStatus('Por favor, conecte sua carteira primeiro.');
+      return;
+    }
+    setIsLoading(true);
+    setStatus('1/4 - Preparando a transação...');
+    setSignature('');
+    try {
+      const response = await fetch('/api/buy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ buyerPublicKey: publicKey.toBase58(), amount }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Falha ao preparar a transação.');
+      setStatus('2/4 - Transação recebida. Por favor, assine na sua carteira...');
+      const tx = VersionedTransaction.deserialize(Buffer.from(data.transaction, 'base64'));
+      setStatus('3/4 - Enviando a transação para a blockchain...');
+      const sig = await sendTransaction(tx, connection);
+      setSignature(sig);
+      setStatus('4/4 - Aguardando a confirmação...');
+      await connection.confirmTransaction({
+        signature: sig,
+        blockhash: data.blockhash,
+        lastValidBlockHeight: (await connection.getLatestBlockhash()).lastValidBlockHeight
+      });
+      setStatus(`Sucesso! Compra de ${amount.toLocaleString()} MNT confirmada.`);
+      // Atualiza o status da venda imediatamente após a compra
+      const newStatus = await fetch('/api/sale-status').then(res => res.json());
+      setSaleData(newStatus);
+    } catch (error) {
+      console.error("Erro na compra:", error);
+      setStatus(`Falha na compra: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  if (!hasMounted) return null;
+
+  const saleEnded = saleData && saleData.saleProgress >= 100;
+
+  return (
+    <div style={{ background: '#1a1a1a', color: 'white', padding: '40px', borderRadius: '10px', maxWidth: '500px', margin: 'auto', textAlign: 'center', fontFamily: 'sans-serif' }}>
+      <h2 style={{ marginBottom: '10px' }}>Venda Pública de MnToken (MNT)</h2>
+      <p style={{ color: '#aaa', marginTop: 0 }}>Participe do lançamento do nosso token.</p>
+      
+      {saleData ? (
+        <div style={{ margin: '20px 0' }}>
+          <p style={{ margin: 0, color: '#ccc' }}>
+            {Math.floor(saleData.tokensSold).toLocaleString()} / {saleData.tokensForSale.toLocaleString()} vendidos
+          </p>
+          <ProgressBar progress={saleData.saleProgress} />
+        </div>
+      ) : (
+        <p>A carregar o estado da venda...</p>
+      )}
+
+      <div style={{ margin: '30px 0' }}>
+        <WalletMultiButton />
+      </div>
+
+      {publicKey && (
+        <>
+          {saleEnded ? (
+            <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>A venda pública terminou. Obrigado a todos os participantes!</p>
+          ) : (
+            <div>
+              <div style={{ margin: '20px 0' }}>
+                <label htmlFor="amount" style={{ display: 'block', marginBottom: '10px', textAlign: 'left' }}>Quantidade de MNT:</label>
+                <input
+                  type="number"
+                  id="amount"
+                  value={amount}
+                  onChange={(e) => setAmount(Number(e.target.value))}
+                  style={{ padding: '12px', width: '100%', borderRadius: '5px', border: '1px solid #444', backgroundColor: '#333', color: 'white', fontSize: '16px' }}
+                  disabled={isLoading}
+                />
+              </div>
+              <button 
+                onClick={handleBuy} 
+                disabled={isLoading || amount <= 0 || !saleData}
+                style={{ padding: '15px 30px', backgroundColor: isLoading ? '#555' : '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '18px', width: '100%', transition: 'background-color 0.3s' }}
+              >
+                {isLoading ? 'Processando...' : `Comprar ${amount.toLocaleString()} MNT`}
+              </button>
+            </div>
+          )}
+        </>
+      )}
+
+      {status && (
+        <div style={{ marginTop: '20px', wordBreak: 'break-all', backgroundColor: '#222', padding: '10px', borderRadius: '5px' }}>
+          <p style={{ margin: 0 }}>{status}</p>
+          {signature && (
+            <a 
+              href={`https://solscan.io/tx/${signature}?cluster=devnet`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ color: '#4CAF50', textDecoration: 'underline' }}
+            >
+              Ver Transação no Solscan
+            </a>
+           )}
+        </div>
+      )}
+    </div>
+  );
+};

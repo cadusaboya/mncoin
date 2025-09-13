@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Wallet from './(providers)/wallet'; // Importe o provider que criámos
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Wallet> {/* Envolva o children com o Wallet provider */}
+          {children}
+        </Wallet>
+      </body>
     </html>
   );
 }
