@@ -11,7 +11,7 @@ const Main = () => {
       <div className="flex-1 lg:mb-0 md:mr-8 px-8">
         <h1 className="text-center lg:text-left text-6xl lg:text-8xl font-serif text-white">The future of Manganese is now</h1>
         <p className="text-center lg:text-justify mt-2 lg:text-lg opacity-75 text-gray-100 lg:pr-10 py-8">
-        Orebit is building the world’s first blockchain-powered ecosystem backed by real manganese ore extraction. 
+        MnToken is building the world’s first blockchain-powered ecosystem backed by real manganese ore extraction. 
         Our mission is to bridge the gap between the mining industry and crypto investors, without the challenges that usually limit access.
 
         

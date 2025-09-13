@@ -50,18 +50,6 @@ main {
     )
     rgb(var(--background-main-rgb));
 }
-
-.card-container {
-      color: rgb(var(--foreground-rgb));
-      background: linear-gradient(
-          to bottom,
-          transparent,
-          rgb(var(--background-end-rgb))
-        )
-        rgb(var(--background-start-rgb));
-
-      transition: transform 0.3s ease-in-out;
-    }
     
     .card-container:hover {
       transform: scale(1.1);

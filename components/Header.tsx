@@ -17,10 +17,10 @@ const Header = () => {
     <header className="fixed z-50 bg-black flex items-center w-screen h-16 px-4 opacity-85">
       <div className="">
         <Image
-          src="/orebitside-nobg.png"
-          alt="Orebit Logo"
-          width={120}
-          height={120}
+          src="/mntoken-nobg.png"
+          alt="MnToken Logo"
+          width={80}
+          height={80}
         />
       </div>
       <div className="flex w-full justify-center items-center pr-24">
