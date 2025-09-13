@@ -87,8 +87,8 @@ export const BuyInterface = () => {
 
   return (
     <div style={{ background: '#1a1a1a', color: 'white', padding: '40px', borderRadius: '10px', maxWidth: '500px', margin: 'auto', textAlign: 'center', fontFamily: 'sans-serif' }}>
-      <h2 style={{ marginBottom: '10px' }}>Venda Pública de MnToken (MNT)</h2>
-      <p style={{ color: '#aaa', marginTop: 0 }}>Participe do lançamento do nosso token.</p>
+      <h2 style={{ marginBottom: '10px' }}>MnToken Public Sale</h2>
+      <p style={{ color: '#aaa', marginTop: 0 }}>Be a part of our manganese ore extraction project.</p>
       
       {saleData ? (
         <div style={{ margin: '20px 0' }}>

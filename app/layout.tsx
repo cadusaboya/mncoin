@@ -6,7 +6,7 @@ import Wallet from './(providers)/wallet'; // Importe o provider que criámos
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Orebit",
+  title: "MnToken",
   description: "The future of Manganese",
 };
 
