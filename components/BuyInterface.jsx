@@ -34,7 +34,7 @@ export const BuyInterface = () => {
         setSaleData(data);
       } catch (error) {
         console.error("Falha ao buscar status da venda:", error);
-        setStatus("Não foi possível carregar o estado da venda.");
+        setStatus("Couldn't fetch sale status.");
       }
     };
     fetchSaleStatus();
@@ -44,11 +44,11 @@ export const BuyInterface = () => {
 
   const handleBuy = async () => {
     if (!publicKey) {
-      setStatus('Por favor, conecte sua carteira primeiro.');
+      setStatus('Please, connect your wallet.');
       return;
     }
     setIsLoading(true);
-    setStatus('1/4 - Preparando a transação...');
+    setStatus('1/4 - Preparing transaction...');
     setSignature('');
     try {
       const response = await fetch('/api/buy', {
@@ -57,25 +57,25 @@ export const BuyInterface = () => {
         body: JSON.stringify({ buyerPublicKey: publicKey.toBase58(), amount }),
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || 'Falha ao preparar a transação.');
-      setStatus('2/4 - Transação recebida. Por favor, assine na sua carteira...');
+      if (!response.ok) throw new Error(data.error || 'Failed to prepare transaction.');
+      setStatus('2/4 - Please, approve the tx on your wallet...');
       const tx = VersionedTransaction.deserialize(Buffer.from(data.transaction, 'base64'));
-      setStatus('3/4 - Enviando a transação para a blockchain...');
+      setStatus('3/4 - Sending to the blockchain...');
       const sig = await sendTransaction(tx, connection);
       setSignature(sig);
-      setStatus('4/4 - Aguardando a confirmação...');
+      setStatus('4/4 - Waiting for confirmation...');
       await connection.confirmTransaction({
         signature: sig,
         blockhash: data.blockhash,
         lastValidBlockHeight: (await connection.getLatestBlockhash()).lastValidBlockHeight
       });
-      setStatus(`Sucesso! Compra de ${amount.toLocaleString()} MNT confirmada.`);
+      setStatus(`Success! Buy of ${amount.toLocaleString()} MNT confirmed.`);
       // Atualiza o status da venda imediatamente após a compra
       const newStatus = await fetch('/api/sale-status').then(res => res.json());
       setSaleData(newStatus);
     } catch (error) {
       console.error("Erro na compra:", error);
-      setStatus(`Falha na compra: ${error.message}`);
+      setStatus(`Failed to purchase: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
@@ -93,12 +93,12 @@ export const BuyInterface = () => {
       {saleData ? (
         <div style={{ margin: '20px 0' }}>
           <p style={{ margin: 0, color: '#ccc' }}>
-            {Math.floor(saleData.tokensSold).toLocaleString()} / {saleData.tokensForSale.toLocaleString()} vendidos
+            {Math.floor(saleData.tokensSold).toLocaleString()} / {saleData.tokensForSale.toLocaleString()} sold
           </p>
           <ProgressBar progress={saleData.saleProgress} />
         </div>
       ) : (
-        <p>A carregar o estado da venda...</p>
+        <p>Tracking sale status...</p>
       )}
 
       <div style={{ margin: '30px 0' }}>
@@ -108,11 +108,11 @@ export const BuyInterface = () => {
       {publicKey && (
         <>
           {saleEnded ? (
-            <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>A venda pública terminou. Obrigado a todos os participantes!</p>
+            <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>Public sale has ended. Thank you for joining!</p>
           ) : (
             <div>
               <div style={{ margin: '20px 0' }}>
-                <label htmlFor="amount" style={{ display: 'block', marginBottom: '10px', textAlign: 'left' }}>Quantidade de MNT:</label>
+                <label htmlFor="amount" style={{ display: 'block', marginBottom: '10px', textAlign: 'left' }}>MNT Amount:</label>
                 <input
                   type="number"
                   id="amount"
@@ -127,7 +127,7 @@ export const BuyInterface = () => {
                 disabled={isLoading || amount <= 0 || !saleData}
                 style={{ padding: '15px 30px', backgroundColor: isLoading ? '#555' : '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '18px', width: '100%', transition: 'background-color 0.3s' }}
               >
-                {isLoading ? 'Processando...' : `Comprar ${amount.toLocaleString()} MNT`}
+                {isLoading ? 'Processing...' : `Buy ${amount.toLocaleString()} MNT`}
               </button>
             </div>
           )}
@@ -144,7 +144,7 @@ export const BuyInterface = () => {
               rel="noopener noreferrer"
               style={{ color: '#4CAF50', textDecoration: 'underline' }}
             >
-              Ver Transação no Solscan
+              See transaction on solscan
             </a>
            )}
         </div>

@@ -9,7 +9,7 @@ export default function BuyPage() {
     <div>
       <Head>
         <title>Buy MnToken (MNT)</title>
-        <meta name="description" content="Be an owner of a Manganese Ore Production now!" />
+        <meta name="description" content="Official website for the MnToken Public Sale" />
       </Head>
 
       <main style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', background: '#0D0D0D' }}>
