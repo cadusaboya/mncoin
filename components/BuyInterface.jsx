@@ -38,7 +38,7 @@ export const BuyInterface = () => {
       }
     };
     fetchSaleStatus();
-    const interval = setInterval(fetchSaleStatus, 30000); // Atualiza a cada 30 segundos
+    const interval = setInterval(fetchSaleStatus, 60000); // Atualiza a cada 30 segundos
     return () => clearInterval(interval);
   }, []);
 
