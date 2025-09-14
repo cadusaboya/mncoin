@@ -7,9 +7,9 @@ import { getAssociatedTokenAddress } from '@solana/spl-token';
 export async function GET() {
   try {
     // Substitua estes valores pelos seus dados reais
-    const MINT = new PublicKey("2uoVtdkbLjLvZRTc2uxaK8AztLhmjEXt67dDCCijPkJu");
+    const MINT = new PublicKey("9rTErETHWFccYwYc7zunvpfPgc5VWhRBPMdHhYEtVRwr");
     const SELLER_PUBLIC_KEY = new PublicKey("BEMLYbQRywaFYB7d4MfXAhsDgUKBZeHzbwuiQ1AanpGW");
-    const RPC_URL = "https://api.devnet.solana.com";
+    const RPC_URL = "https://api.mainnet-beta.solana.com";
 
     const connection = new Connection(RPC_URL, "confirmed" );
     const sellerATA = await getAssociatedTokenAddress(MINT, SELLER_PUBLIC_KEY);

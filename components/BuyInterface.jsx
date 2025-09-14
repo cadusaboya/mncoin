@@ -159,7 +159,7 @@ export const BuyInterface = () => {
           <p style={{ margin: 0 }}>{status}</p>
           {signature && (
             <a 
-              href={`https://solscan.io/tx/${signature}?cluster=devnet`} 
+              href={`https://solscan.io/tx/${signature}`} 
               target="_blank" 
               rel="noopener noreferrer"
               style={{ color: '#4CAF50', textDecoration: 'underline' }}

@@ -19,12 +19,12 @@ export async function POST(req) {
     }
 
     // ... (O resto do seu código funcional continua aqui, sem alterações)
-    const MINT = new PublicKey("5fLVK9KQdH8prwV3ZH4yyfQsm3ahsy7F82NHQvSd5pVP");
+    const MINT = new PublicKey("9rTErETHWFccYwYc7zunvpfPgc5VWhRBPMdHhYEtVRwr");
     const DECIMALS = 6;
     const sellerSecretKey = JSON.parse(process.env.SELLER_SECRET_KEY);
     const sellerKeypair = Keypair.fromSecretKey(new Uint8Array(sellerSecretKey));
     const sellerPublicKey = sellerKeypair.publicKey;
-    const connection = new Connection("https://api.devnet.solana.com", "confirmed" );
+    const connection = new Connection("https://api.mainnet-beta.solana.com", "confirmed" );
     const sellerATA = await getAssociatedTokenAddress(MINT, sellerPublicKey);
 
     // Lógica do Hard Cap (usando BigInt)
