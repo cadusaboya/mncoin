@@ -37,7 +37,7 @@ const Main = () => {
                     {/* Botão Principal - Buy Now */}
             <a href="https://mntoken.xyz/buy" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" className="shadow-md px-14 py-6 text-xl">
-                Public Sale is now LIVE!
+                Public Sale SOON
               </Button>
             </a>
 
