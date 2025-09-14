@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Wallet from './(providers)/wallet'; // Importe o provider que criámos
+import { Analytics } from "@vercel/analytics/next"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Wallet> {/* Envolva o children com o Wallet provider */}
           {children}
+          <Analytics />
         </Wallet>
       </body>
     </html>
