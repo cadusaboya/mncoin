@@ -27,7 +27,7 @@ const Main = () => {
               </Button>
             </a>
             <Button variant="outline" className="shadow-md px-4 py-6" asChild>
-              <Link href="https://discord.gg/K5Tcw2NbXU" target="_blank" rel="noopener noreferrer">
+              <Link href="https://discord.gg/TvGMtswb" target="_blank" rel="noopener noreferrer">
                 <FaDiscord className="w-6 h-6 mr-2" />
                 Join our Discord
               </Link>
