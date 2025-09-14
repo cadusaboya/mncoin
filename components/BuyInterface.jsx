@@ -1,4 +1,4 @@
-// components/BuyInterface.jsx
+// components/BuyInterface.jsx (Versão Final Completa)
 'use client';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
@@ -24,23 +24,31 @@ export const BuyInterface = () => {
   const [saleData, setSaleData] = useState(null);
   const [hasMounted, setHasMounted] = useState(false);
 
+  // --- LÓGICA DO SWITCH DA VENDA (FRONTEND) ---
+  // Lê a variável de ambiente pública. O valor 'true' (string) ativa a venda.
+  const saleIsActive = process.env.NEXT_PUBLIC_SALE_IS_ACTIVE === 'true';
+  // --- FIM DA LÓGICA DO SWITCH ---
+
   useEffect(() => {
     setHasMounted(true);
-    const fetchSaleStatus = async () => {
-      try {
-        const response = await fetch('/api/sale-status');
-        const data = await response.json();
-        if (data.error) throw new Error(data.error);
-        setSaleData(data);
-      } catch (error) {
-        console.error("Falha ao buscar status da venda:", error);
-        setStatus("Couldn't fetch sale status.");
-      }
-    };
-    fetchSaleStatus();
-    const interval = setInterval(fetchSaleStatus, 60000); // Atualiza a cada 30 segundos
-    return () => clearInterval(interval);
-  }, []);
+    // Só busca o status da venda se a venda estiver ativa
+    if (saleIsActive) {
+      const fetchSaleStatus = async () => {
+        try {
+          const response = await fetch('/api/sale-status');
+          const data = await response.json();
+          if (data.error) throw new Error(data.error);
+          setSaleData(data);
+        } catch (error) {
+          console.error("Falha ao buscar status da venda:", error);
+          setStatus("Couldn't fetch sale status.");
+        }
+      };
+      fetchSaleStatus();
+      const interval = setInterval(fetchSaleStatus, 60000); // Atualiza a cada 60 segundos
+      return () => clearInterval(interval); // Limpa o intervalo quando o componente é desmontado
+    }
+  }, [saleIsActive]); // A dependência garante que o hook reage se o estado mudar
 
   const handleBuy = async () => {
     if (!publicKey) {
@@ -70,7 +78,7 @@ export const BuyInterface = () => {
         lastValidBlockHeight: (await connection.getLatestBlockhash()).lastValidBlockHeight
       });
       setStatus(`Success! Buy of ${amount.toLocaleString()} MNT confirmed.`);
-      // Atualiza o status da venda imediatamente após a compra
+      // Atualiza o status da venda imediatamente após a compra bem-sucedida
       const newStatus = await fetch('/api/sale-status').then(res => res.json());
       setSaleData(newStatus);
     } catch (error) {
@@ -81,7 +89,10 @@ export const BuyInterface = () => {
     }
   };
 
-  if (!hasMounted) return null;
+  // Evita o erro de hidratação
+  if (!hasMounted) {
+    return null;
+  }
 
   const saleEnded = saleData && saleData.saleProgress >= 100;
 
@@ -90,7 +101,14 @@ export const BuyInterface = () => {
       <h2 style={{ marginBottom: '10px' }}>MnToken Public Sale</h2>
       <p style={{ color: '#aaa', marginTop: 0 }}>Be a part of our manganese ore extraction project.</p>
       
-      {saleData ? (
+      {/* Lógica de exibição condicional */}
+      {!saleIsActive ? (
+        // 1. Se a venda NÃO está ativa
+        <div style={{ margin: '20px 0', padding: '20px', backgroundColor: '#222', borderRadius: '5px' }}>
+          <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>The public sale has not started yet. Stay tuned!</p>
+        </div>
+      ) : saleData ? (
+        // 2. Se a venda ESTÁ ativa e os dados foram carregados
         <div style={{ margin: '20px 0' }}>
           <p style={{ margin: 0, color: '#ccc' }}>
             {Math.floor(saleData.tokensSold).toLocaleString()} / {saleData.tokensForSale.toLocaleString()} sold
@@ -98,6 +116,7 @@ export const BuyInterface = () => {
           <ProgressBar progress={saleData.saleProgress} />
         </div>
       ) : (
+        // 3. Se a venda ESTÁ ativa mas os dados ainda estão a carregar
         <p>Tracking sale status...</p>
       )}
 
@@ -105,7 +124,8 @@ export const BuyInterface = () => {
         <WalletMultiButton />
       </div>
 
-      {publicKey && (
+      {/* Mostra o formulário de compra apenas se a carteira estiver conectada E a venda estiver ativa */}
+      {publicKey && saleIsActive && (
         <>
           {saleEnded ? (
             <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>Public sale has ended. Thank you for joining!</p>
@@ -125,7 +145,7 @@ export const BuyInterface = () => {
               <button 
                 onClick={handleBuy} 
                 disabled={isLoading || amount <= 0 || !saleData}
-                style={{ padding: '15px 30px', backgroundColor: isLoading ? '#555' : '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '18px', width: '100%', transition: 'background-color 0.3s' }}
+                style={{ padding: '15px 30px', backgroundColor: isLoading || !saleData ? '#555' : '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '18px', width: '100%', transition: 'background-color 0.3s' }}
               >
                 {isLoading ? 'Processing...' : `Buy ${amount.toLocaleString()} MNT`}
               </button>
@@ -144,9 +164,9 @@ export const BuyInterface = () => {
               rel="noopener noreferrer"
               style={{ color: '#4CAF50', textDecoration: 'underline' }}
             >
-              See transaction on solscan
+              See transaction on Solscan
             </a>
-           )}
+            )}
         </div>
       )}
     </div>
