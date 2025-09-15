@@ -1,7 +1,7 @@
 // app/buy/page.js
 'use client'; // A página que usa hooks de cliente precisa de ser um client component
 
-import { BuyInterface } from '../../components/BuyInterface'; // Ajuste o caminho se necessário
+import { BuyInterface } from '@/components/BuyInterface'; // Ajuste o caminho se necessário
 import Head from 'next/head';
 
 export default function BuyPage() {
