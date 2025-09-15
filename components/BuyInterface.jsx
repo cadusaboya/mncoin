@@ -1,9 +1,11 @@
-// components/BuyInterface.jsx (Versão Final Completa)
+// components/BuyInterface.jsx (Layout Final com Vídeo Alinhado)
 'use client';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { VersionedTransaction } from '@solana/web3.js';
 import { useState, useEffect } from 'react';
+import { FiCopy } from 'react-icons/fi';
+import { LazyVideo } from './LazyVideo'; // Importa o novo componente
 
 // Componente reutilizável para a barra de progresso
 const ProgressBar = ({ progress }) => (
@@ -23,15 +25,13 @@ export const BuyInterface = () => {
   const [signature, setSignature] = useState('');
   const [saleData, setSaleData] = useState(null);
   const [hasMounted, setHasMounted] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('');
 
-  // --- LÓGICA DO SWITCH DA VENDA (FRONTEND) ---
-  // Lê a variável de ambiente pública. O valor 'true' (string) ativa a venda.
   const saleIsActive = process.env.NEXT_PUBLIC_SALE_IS_ACTIVE === 'true';
-  // --- FIM DA LÓGICA DO SWITCH ---
+  const contractAddress = "9rTErETHWFccYwYc7zunvpfPgc5VWhRBPMdHhYEtVRwr";
 
   useEffect(() => {
     setHasMounted(true);
-    // Só busca o status da venda se a venda estiver ativa
     if (saleIsActive) {
       const fetchSaleStatus = async () => {
         try {
@@ -45,10 +45,10 @@ export const BuyInterface = () => {
         }
       };
       fetchSaleStatus();
-      const interval = setInterval(fetchSaleStatus, 60000); // Atualiza a cada 60 segundos
-      return () => clearInterval(interval); // Limpa o intervalo quando o componente é desmontado
+      const interval = setInterval(fetchSaleStatus, 60000);
+      return () => clearInterval(interval);
     }
-  }, [saleIsActive]); // A dependência garante que o hook reage se o estado mudar
+  }, [saleIsActive]);
 
   const handleBuy = async () => {
     if (!publicKey) {
@@ -78,7 +78,6 @@ export const BuyInterface = () => {
         lastValidBlockHeight: (await connection.getLatestBlockhash()).lastValidBlockHeight
       });
       setStatus(`Success! Buy of ${amount.toLocaleString()} MNT confirmed.`);
-      // Atualiza o status da venda imediatamente após a compra bem-sucedida
       const newStatus = await fetch('/api/sale-status').then(res => res.json());
       setSaleData(newStatus);
     } catch (error) {
@@ -89,7 +88,12 @@ export const BuyInterface = () => {
     }
   };
 
-  // Evita o erro de hidratação
+  const handleCopy = () => {
+    navigator.clipboard.writeText(contractAddress);
+    setCopyStatus('Copied!');
+    setTimeout(() => setCopyStatus(''), 2000);
+  };
+
   if (!hasMounted) {
     return null;
   }
@@ -97,78 +101,84 @@ export const BuyInterface = () => {
   const saleEnded = saleData && saleData.saleProgress >= 100;
 
   return (
-    <div style={{ background: '#1a1a1a', color: 'white', padding: '40px', borderRadius: '10px', maxWidth: '500px', margin: 'auto', textAlign: 'center', fontFamily: 'sans-serif' }}>
-      <h2 style={{ marginBottom: '10px' }}>MnToken Public Sale</h2>
-      <p style={{ color: '#aaa', marginTop: 0 }}>Be a part of our manganese ore extraction project.</p>
+    <div className="flex flex-col lg:flex-row items-center justify-center gap-12 w-full max-w-6xl mx-auto px-4 py-16">
       
-      {/* Lógica de exibição condicional */}
-      {!saleIsActive ? (
-        // 1. Se a venda NÃO está ativa
-        <div style={{ margin: '20px 0', padding: '20px', backgroundColor: '#222', borderRadius: '5px' }}>
-          <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>The public sale has not started yet. Stay tuned!</p>
+      {/* Coluna da Esquerda: Vídeo com altura controlada */}
+      <div className="w-full lg:w-1/2">
+        <div className="w-full h-full max-h-[600px] lg:max-h-full overflow-hidden rounded-lg shadow-2xl">
+          <LazyVideo src="/launch-video.mp4"/>
         </div>
-      ) : saleData ? (
-        // 2. Se a venda ESTÁ ativa e os dados foram carregados
-        <div style={{ margin: '20px 0' }}>
-          <p style={{ margin: 0, color: '#ccc' }}>
-            {Math.floor(saleData.tokensSold).toLocaleString()} / {saleData.tokensForSale.toLocaleString()} sold
-          </p>
-          <ProgressBar progress={saleData.saleProgress} />
-        </div>
-      ) : (
-        // 3. Se a venda ESTÁ ativa mas os dados ainda estão a carregar
-        <p>Tracking sale status...</p>
-      )}
-
-      <div style={{ margin: '30px 0' }}>
-        <WalletMultiButton />
       </div>
 
-      {/* Mostra o formulário de compra apenas se a carteira estiver conectada E a venda estiver ativa */}
-      {publicKey && saleIsActive && (
-        <>
-          {saleEnded ? (
-            <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>Public sale has ended. Thank you for joining!</p>
-          ) : (
-            <div>
-              <div style={{ margin: '20px 0' }}>
-                <label htmlFor="amount" style={{ display: 'block', marginBottom: '10px', textAlign: 'left' }}>MNT Amount:</label>
-                <input
-                  type="number"
-                  id="amount"
-                  value={amount}
-                  onChange={(e) => setAmount(Number(e.target.value))}
-                  style={{ padding: '12px', width: '100%', borderRadius: '5px', border: '1px solid #444', backgroundColor: '#333', color: 'white', fontSize: '16px' }}
-                  disabled={isLoading}
-                />
-              </div>
-              <button 
-                onClick={handleBuy} 
-                disabled={isLoading || amount <= 0 || !saleData}
-                style={{ padding: '15px 30px', backgroundColor: isLoading || !saleData ? '#555' : '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '18px', width: '100%', transition: 'background-color 0.3s' }}
-              >
-                {isLoading ? 'Processing...' : `Buy ${amount.toLocaleString()} MNT`}
+      {/* Coluna da Direita: Interface de Compra */}
+      <div className="w-full lg:w-1/2">
+        <div style={{ background: '#1a1a1a', color: 'white', padding: '40px', borderRadius: '10px', textAlign: 'center', fontFamily: 'sans-serif' }}>
+          
+          <h2 className="text-2xl font-bold">MnToken Public Sale</h2>
+          <p style={{ color: '#aaa', marginTop: 0 }}>Be a part of our manganese ore extraction project.</p>
+          
+          <div style={{ margin: '20px 0', fontSize: '12px', color: '#888', wordBreak: 'break-all' }}>
+            <span>Official Contract Address:</span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginTop: '5px', backgroundColor: '#222', padding: '8px', borderRadius: '5px' }}>
+              <a href={`https://solscan.io/token/${contractAddress}`} target="_blank" rel="noopener noreferrer" style={{ color: '#ccc', textDecoration: 'none' }}>
+                {contractAddress}
+              </a>
+              <button onClick={handleCopy} title="Copy Address" style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
+                <FiCopy size={16} />
               </button>
             </div>
-          )}
-        </>
-      )}
+            {copyStatus && <span style={{ color: '#4CAF50', fontSize: '12px', marginTop: '5px', display: 'block' }}>{copyStatus}</span>}
+          </div>
 
-      {status && (
-        <div style={{ marginTop: '20px', wordBreak: 'break-all', backgroundColor: '#222', padding: '10px', borderRadius: '5px' }}>
-          <p style={{ margin: 0 }}>{status}</p>
-          {signature && (
-            <a 
-              href={`https://solscan.io/tx/${signature}`} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              style={{ color: '#4CAF50', textDecoration: 'underline' }}
-            >
-              See transaction on Solscan
-            </a>
-            )}
+          {!saleIsActive ? (
+            <div style={{ margin: '20px 0', padding: '20px', backgroundColor: '#222', borderRadius: '5px' }}>
+              <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>The public sale has not started yet. Stay tuned!</p>
+            </div>
+           ) : saleData ? (
+            <div style={{ margin: '20px 0' }}>
+              <p style={{ margin: 0, color: '#ccc' }}>
+                {Math.floor(saleData.tokensSold).toLocaleString()} / {saleData.tokensForSale.toLocaleString()} sold
+              </p>
+              <ProgressBar progress={saleData.saleProgress} />
+            </div>
+          ) : (
+            <p>Tracking sale status...</p>
+          )}
+
+          <div style={{ margin: '30px 0' }}>
+            <WalletMultiButton />
+          </div>
+
+          {publicKey && saleIsActive && (
+            <>
+              {saleEnded ? (
+                <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>Public sale has ended. Thank you for joining!</p>
+              ) : (
+                <div>
+                  <div style={{ margin: '20px 0' }}>
+                    <label htmlFor="amount" style={{ display: 'block', marginBottom: '10px', textAlign: 'left' }}>MNT Amount:</label>
+                    <input type="number" id="amount" value={amount} onChange={(e) => setAmount(Number(e.target.value))} style={{ padding: '12px', width: '100%', borderRadius: '5px', border: '1px solid #444', backgroundColor: '#333', color: 'white', fontSize: '16px' }} disabled={isLoading} />
+                  </div>
+                  <button onClick={handleBuy} disabled={isLoading || amount <= 0 || !saleData} style={{ padding: '15px 30px', backgroundColor: isLoading || !saleData ? '#555' : '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '18px', width: '100%', transition: 'background-color 0.3s' }}>
+                    {isLoading ? 'Processing...' : `Buy ${amount.toLocaleString()} MNT`}
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+
+          {status && (
+            <div style={{ marginTop: '20px', wordBreak: 'break-all', backgroundColor: '#222', padding: '10px', borderRadius: '5px' }}>
+              <p style={{ margin: 0 }}>{status}</p>
+              {signature && (
+                <a href={`https://solscan.io/tx/${signature}`} target="_blank" rel="noopener noreferrer" style={{ color: '#4CAF50', textDecoration: 'underline' }}>
+                  See transaction on Solscan
+                </a>
+               )}
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

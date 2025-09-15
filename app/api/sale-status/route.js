@@ -24,7 +24,7 @@ export async function GET() {
     }
 
     const TOTAL_SUPPLY = 1_000_000_000;
-    const TOKENS_FOR_SALE = 600_000_000;
+    const TOKENS_FOR_SALE = 500_000_000;
     
     const tokensSold = TOTAL_SUPPLY - sellerBalance;
     const saleProgress = (tokensSold / TOKENS_FOR_SALE) * 100;
