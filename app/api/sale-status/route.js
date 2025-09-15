@@ -23,7 +23,7 @@ export async function GET() {
         console.log("Conta de token do vendedor provavelmente vazia, tratando saldo como 0.");
     }
 
-    const TOTAL_SUPPLY = 1_000_000_000;
+    const TOTAL_SUPPLY = 500_000_000;
     const TOKENS_FOR_SALE = 500_000_000;
     
     const tokensSold = TOTAL_SUPPLY - sellerBalance;
