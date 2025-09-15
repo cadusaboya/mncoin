@@ -1,4 +1,4 @@
-// components/BuyInterface.jsx (Final Version with Price Display)
+// components/BuyInterface.jsx (Versão Final com Fluxo de Assinatura Corrigido)
 'use client';
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import { FiCopy } from 'react-icons/fi';
 import { LazyVideo } from './LazyVideo';
 
-// ... (ProgressBar component remains the same)
+// Componente reutilizável para a barra de progresso
 const ProgressBar = ({ progress }) => (
   <div style={{ width: '100%', backgroundColor: '#333', borderRadius: '5px', overflow: 'hidden', marginTop: '10px', border: '1px solid #444' }}>
     <div style={{ width: `${progress}%`, backgroundColor: '#4CAF50', padding: '8px 0', textAlign: 'center', color: 'white', transition: 'width 0.5s ease-in-out', fontWeight: 'bold' }}>
@@ -15,7 +15,6 @@ const ProgressBar = ({ progress }) => (
     </div>
   </div>
 );
-
 
 export const BuyInterface = () => {
   const { connection } = useConnection();
@@ -30,11 +29,7 @@ export const BuyInterface = () => {
 
   const saleIsActive = process.env.NEXT_PUBLIC_SALE_IS_ACTIVE === 'true';
   const contractAddress = "9rTErETHWFccYwYc7zunvpfPgc5VWhRBPMdHhYEtVRwr";
-
-  // --- 1. DEFINE THE PRICE ---
   const MNT_PRICE_USD = 0.006;
-
-  // --- 2. CALCULATE THE TOTAL COST ---
   const totalCostUSD = (amount * MNT_PRICE_USD).toFixed(2);
 
   useEffect(() => {
@@ -57,8 +52,78 @@ export const BuyInterface = () => {
     }
   }, [saleIsActive]);
 
-  const handleBuy = async () => { /* ... (your handleBuy function remains the same) ... */ };
-  const handleCopy = () => { /* ... (your handleCopy function remains the same) ... */ };
+  // NOVA FUNÇÃO handleBuy COM O FLUXO CORRETO
+  const handleBuy = async () => {
+    if (!publicKey) {
+      setStatus('Please, connect your wallet.');
+      return;
+    }
+    setIsLoading(true);
+    setStatus('1/5 - Preparing transaction...');
+    setSignature('');
+    try {
+      // ETAPA 1: Chamar a API /api/buy para obter a transação não assinada
+      const prepResponse = await fetch('/api/buy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ buyerPublicKey: publicKey.toBase58(), amount }),
+      });
+      const prepData = await prepResponse.json();
+      if (!prepResponse.ok) throw new Error(prepData.error || 'Failed to prepare transaction.');
+      
+      setStatus('2/5 - Please, approve the transaction in your wallet...');
+      
+      // ETAPA 2: Pedir à Phantom para assinar (primeira assinatura)
+      const tx = VersionedTransaction.deserialize(Buffer.from(prepData.transaction, 'base64'));
+      
+      // O `sendTransaction` da wallet-adapter na verdade assina e envia, mas não podemos usá-lo diretamente
+      // porque precisamos da segunda assinatura do backend. Em vez disso, usamos `signTransaction`.
+      // Verificamos se a função existe para compatibilidade.
+      if (!window.solana.signTransaction) throw new Error('Wallet does not support signTransaction. Please update your wallet.');
+      
+      const signedTx = await window.solana.signTransaction(tx);
+      
+      setStatus('3/5 - Sending your signature to the server...');
+
+      // ETAPA 3: Enviar a transação assinada pelo comprador para a nova API /api/send
+      const sendResponse = await fetch('/api/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ signedTransaction: Buffer.from(signedTx.serialize()).toString('base64') }),
+      });
+      const sendData = await sendResponse.json();
+      if (!sendResponse.ok) throw new Error(sendData.error || 'Failed to send transaction.');
+
+      const sig = sendData.signature;
+      setSignature(sig);
+      setStatus('4/5 - Waiting for confirmation...');
+
+      // ETAPA 4: Confirmar a transação
+      await connection.confirmTransaction({
+        signature: sig,
+        blockhash: prepData.blockhash,
+        lastValidBlockHeight: (await connection.getLatestBlockhash()).lastValidBlockHeight
+      });
+
+      setStatus(`5/5 - Success! Purchase of ${amount.toLocaleString()} MNT confirmed.`);
+      
+      // Atualiza o status da venda
+      const newStatus = await fetch('/api/sale-status').then(res => res.json());
+      setSaleData(newStatus);
+
+    } catch (error) {
+      console.error("Purchase Error:", error);
+      setStatus(`Failed to purchase: ${error.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(contractAddress);
+    setCopyStatus('Copied!');
+    setTimeout(() => setCopyStatus(''), 2000);
+  };
 
   if (!hasMounted) {
     return null;
@@ -78,10 +143,9 @@ export const BuyInterface = () => {
       <div className="w-full lg:w-1/2">
         <div style={{ background: '#1a1a1a', color: 'white', padding: '40px', borderRadius: '10px', textAlign: 'center', fontFamily: 'sans-serif' }}>
           
-          <h2 className="text-2xl font-bold">MnToken Public Sale</h2>
+          <h2 className="mb-2 text-4xl font-bold">MnToken Public Sale</h2>
           <p style={{ color: '#aaa', marginTop: 0 }}>Be a part of our manganese ore extraction project.</p>
           
-          {/* ... (Contract Address section remains the same) ... */}
           <div style={{ margin: '20px 0', fontSize: '12px', color: '#888', wordBreak: 'break-all' }}>
             <span>Official Contract Address:</span>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginTop: '5px', backgroundColor: '#222', padding: '8px', borderRadius: '5px' }}>
@@ -95,7 +159,6 @@ export const BuyInterface = () => {
             {copyStatus && <span style={{ color: '#4CAF50', fontSize: '12px', marginTop: '5px', display: 'block' }}>{copyStatus}</span>}
           </div>
 
-          {/* --- 3. DISPLAY THE PRICE --- */}
           <div style={{ margin: '20px 0', padding: '10px', backgroundColor: '#222', borderRadius: '5px', border: '1px solid #444' }}>
             <p style={{ margin: 0, fontWeight: 'bold', color: '#ccc' }}>Price: 1 MNT = ${MNT_PRICE_USD}</p>
           </div>
@@ -129,7 +192,6 @@ export const BuyInterface = () => {
                     <label htmlFor="amount" style={{ display: 'block', marginBottom: '10px', textAlign: 'left' }}>MNT Amount:</label>
                     <input type="number" id="amount" value={amount} onChange={(e) => setAmount(Number(e.target.value))} style={{ padding: '12px', width: '100%', borderRadius: '5px', border: '1px solid #444', backgroundColor: '#333', color: 'white', fontSize: '16px' }} disabled={isLoading} />
                   
-                    {/* --- 4. DISPLAY THE TOTAL COST --- */}
                     <div style={{ textAlign: 'right', marginTop: '10px', color: '#aaa' }}>
                       <p style={{ margin: 0 }}>Total Cost: <span style={{ fontWeight: 'bold', color: 'white' }}>${totalCostUSD}</span></p>
                       <p style={{ margin: 0, fontSize: '12px' }}>(Price in SOL will be calculated at checkout)</p>

@@ -1,21 +1,32 @@
-import { Resend } from 'resend';
+// app/api/send/route.js (Versão 2: Assinar e Enviar)
 import { NextResponse } from 'next/server';
+import { Connection, Keypair, VersionedTransaction } from '@solana/web3.js';
 
-export async function POST(data: Request) {
-  const { subject, body, name, email } = await data.json();
-  const resend = new Resend(process.env.RESEND_API_KEY);
-  
+export async function POST(req) {
   try {
-    await resend.emails.send({
-      from: 'mncoin@resend.dev',
-      to: 'carlosepsaboya@gmail.com',
-      subject: `${subject}`,
-      html: `<p>From: ${name}</p>
-             <p>Email: ${email}</p>
-             <p>${body}</p>` // Setting the email body as HTML
-    });
-    return NextResponse.json({ message: "Email sent!" });
+    const { signedTransaction } = await req.json();
+    if (!signedTransaction) {
+      return NextResponse.json({ error: 'Missing signedTransaction' }, { status: 400 });
+    }
+
+    const sellerSecretKey = JSON.parse(process.env.SELLER_SECRET_KEY);
+    const sellerKeypair = Keypair.fromSecretKey(new Uint8Array(sellerSecretKey));
+
+    // Desserializa a transação que veio do frontend
+    const tx = VersionedTransaction.deserialize(Buffer.from(signedTransaction, 'base64'));
+
+    // Adiciona a assinatura do vendedor (a segunda assinatura)
+    tx.sign([sellerKeypair]);
+
+    const connection = new Connection(process.env.RPC_URL, "confirmed");
+
+    // Envia a transação finalizada para a blockchain
+    const sig = await connection.sendTransaction(tx, { skipPreflight: false });
+
+    return NextResponse.json({ signature: sig });
+
   } catch (error) {
-    return NextResponse.json({ error });
+    console.error("Erro na API /api/send:", error);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
