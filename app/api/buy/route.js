@@ -15,7 +15,6 @@ export async function POST(request) {
 
     const MINT = new PublicKey("9rTErETHWFccYwYc7zunvpfPgc5VWhRBPMdHhYEtVRwr");
     const DECIMALS = 6;
-    // A chave do vendedor só é necessária para obter a PublicKey e o endereço do token
     const sellerSecretKey = JSON.parse(process.env.SELLER_SECRET_KEY);
     const sellerKeypair = Keypair.fromSecretKey(new Uint8Array(sellerSecretKey));
     const sellerPublicKey = sellerKeypair.publicKey;
@@ -23,20 +22,23 @@ export async function POST(request) {
     const connection = new Connection(process.env.SOLANA_RPC_URL || "https://api.mainnet-beta.solana.com", "confirmed" );
     const sellerATA = await getAssociatedTokenAddress(MINT, sellerPublicKey);
 
-    // ... (toda a sua lógica de hard cap e cálculo de preço permanece a mesma) ...
-    const SELLER_RESERVE_RAW = BigInt(200_000_000) * BigInt(10 ** DECIMALS);
+    // ========================================================================
+    // --- INÍCIO DA MODIFICAÇÃO PARA TESTE ---
+    // A lógica de verificação de saldo e hard cap foi removida daqui.
+    // O código agora assume que a venda é sempre possível.
+    
+    // const SELLER_RESERVE_RAW = BigInt(200_000_000) * BigInt(10 ** DECIMALS);
+    // const sellerBalanceResponse = await connection.getTokenAccountBalance(sellerATA);
+    // const sellerBalanceRaw = BigInt(sellerBalanceResponse.value.amount);
+    // if (sellerBalanceRaw <= SELLER_RESERVE_RAW) { ... }
+    // if (newSellerBalanceRaw < SELLER_RESERVE_RAW) { ... }
+
+    // --- FIM DA MODIFICAÇÃO PARA TESTE ---
+    // ========================================================================
+
     const amountToBuyRaw = BigInt(Math.floor(amount)) * BigInt(10 ** DECIMALS);
-    const sellerBalanceResponse = await connection.getTokenAccountBalance(sellerATA);
-    const sellerBalanceRaw = BigInt(sellerBalanceResponse.value.amount);
-    if (sellerBalanceRaw <= SELLER_RESERVE_RAW) {
-        return NextResponse.json({ error: `A venda terminou. Não há mais tokens disponíveis.` }, { status: 400 });
-    }
-    const newSellerBalanceRaw = sellerBalanceRaw - amountToBuyRaw;
-    if (newSellerBalanceRaw < SELLER_RESERVE_RAW) {
-      const availableToSellRaw = sellerBalanceRaw - SELLER_RESERVE_RAW;
-      const availableToSellUi = Number(availableToSellRaw / BigInt(10 ** DECIMALS));
-      return NextResponse.json({ error: `A quantidade solicitada excede o estoque. Apenas ${availableToSellUi.toLocaleString()} MNT estão disponíveis.` }, { status: 400 });
-    }
+
+    // Lógica de Preços com Pyth (inalterada)
     const solPriceFeedId = "ef0d8b6fda2ceba41da15d4095d1da392a0d2f8ed0c6c7bc0f4cfac8c280b56d";
     const pythUrl = `https://hermes.pyth.network/v2/updates/price/latest?ids[]=${solPriceFeedId}`;
     const pythResponse = await fetch(pythUrl, { headers: { 'accept': 'application/json' } } );
@@ -49,8 +51,8 @@ export async function POST(request) {
     const PRICE_USD = 0.006;
     const pricePerTokenSOL = PRICE_USD / SOL_USD;
     const lamports = Math.floor(amount * pricePerTokenSOL * 1e9);
-    // --- Fim da lógica inalterada ---
 
+    // Construção da Transação (inalterada)
     const buyerPubkey = new PublicKey(buyerPublicKey);
     const buyerATA = await getAssociatedTokenAddress(MINT, buyerPubkey);
     const ixs = [];
@@ -64,19 +66,15 @@ export async function POST(request) {
     const { blockhash } = await connection.getLatestBlockhash("finalized");
     
     const message = new TransactionMessage({
-        payerKey: buyerPubkey, // O comprador é o pagador da taxa
+        payerKey: buyerPubkey,
         recentBlockhash: blockhash,
         instructions: ixs
     }).compileToV0Message();
     
     const tx = new VersionedTransaction(message);
 
-    // **CORREÇÃO CRÍTICA: A ASSINATURA DO VENDEDOR FOI REMOVIDA DAQUI**
-    // A transação é enviada NÃO ASSINADA para o frontend.
-
     const serializedTx = Buffer.from(tx.serialize()).toString('base64');
     
-    // Retornamos o blockhash para que o frontend possa usá-lo na confirmação, se necessário.
     return NextResponse.json({ transaction: serializedTx, blockhash });
 
   } catch (error) {
