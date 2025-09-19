@@ -2,11 +2,11 @@
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { VersionedTransaction } from '@solana/web3.js';
-import { useState, useEffect, useCallback } from 'react'; // Adicionado useCallback
+import { useState, useEffect, useCallback } from 'react';
 import { FiCopy } from 'react-icons/fi';
 import { LazyVideo } from './LazyVideo';
 
-// Componente reutilizável para a barra de progresso (do seu código original)
+// O componente ProgressBar não é mais necessário para este teste, mas podemos deixá-lo aqui.
 const ProgressBar = ({ progress }) => (
   <div style={{ width: '100%', backgroundColor: '#333', borderRadius: '5px', overflow: 'hidden', marginTop: '10px', border: '1px solid #444' }}>
     <div style={{ width: `${progress}%`, backgroundColor: '#4CAF50', padding: '8px 0', textAlign: 'center', color: 'white', transition: 'width 0.5s ease-in-out', fontWeight: 'bold' }}>
@@ -16,16 +16,15 @@ const ProgressBar = ({ progress }) => (
 );
 
 export const BuyInterface = () => {
-  // --- ESTADOS (do seu código original, com pequenas adições) ---
   const { connection } = useConnection();
-  // Importante: Trocamos sendTransaction por signTransaction
   const { publicKey, signTransaction } = useWallet(); 
   const [amount, setAmount] = useState(1000);
   const [isLoading, setIsLoading] = useState(false);
   const [status, setStatus] = useState('');
-  const [error, setError] = useState(''); // Adicionado para mensagens de erro claras
-  const [txid, setTxid] = useState(''); // Usaremos txid para a assinatura final
-  const [saleData, setSaleData] = useState(null);
+  const [error, setError] = useState('');
+  const [txid, setTxid] = useState('');
+  // O estado saleData não é mais necessário para este teste
+  // const [saleData, setSaleData] = useState(null); 
   const [hasMounted, setHasMounted] = useState(false);
   const [copyStatus, setCopyStatus] = useState('');
 
@@ -34,29 +33,18 @@ export const BuyInterface = () => {
   const MNT_PRICE_USD = 0.006;
   const totalCostUSD = (amount * MNT_PRICE_USD).toFixed(2);
 
-  // --- LÓGICA DE BUSCA DE DADOS (do seu código original) ---
+  // ========================================================================
+  // --- INÍCIO DA MODIFICAÇÃO PARA TESTE ---
+  // O useEffect que chamava /api/sale-status foi removido.
   useEffect(() => {
     setHasMounted(true);
-    if (saleIsActive) {
-      const fetchSaleStatus = async () => {
-        try {
-          const response = await fetch('/api/sale-status');
-          const data = await response.json();
-          if (data.error) throw new Error(data.error);
-          setSaleData(data);
-        } catch (error) {
-          console.error("Falha ao buscar status da venda:", error);
-          setError("Couldn't fetch sale status.");
-        }
-      };
-      fetchSaleStatus();
-      const interval = setInterval(fetchSaleStatus, 60000);
-      return () => clearInterval(interval);
-    }
-  }, [saleIsActive]);
+    // A lógica de fetchSaleStatus foi removida.
+  }, []);
+  // --- FIM DA MODIFICAÇÃO PARA TESTE ---
+  // ========================================================================
 
-  // --- NOVA FUNÇÃO handleBuy (LÓGICA DE 4 PASSOS) ---
   const handleBuy = useCallback(async () => {
+    // ... (a função handleBuy permanece exatamente a mesma que corrigimos antes) ...
     if (!publicKey || !signTransaction) {
       setError('Por favor, conecte a sua carteira primeiro.');
       return;
@@ -65,14 +53,11 @@ export const BuyInterface = () => {
       setError('Por favor, insira uma quantidade válida.');
       return;
     }
-
     setIsLoading(true);
     setStatus('');
     setError('');
     setTxid('');
-
     try {
-      // Passo 1: Chamar a API /api/buy para obter a transação parcialmente assinada
       setStatus('1/4 - A preparar a transação...');
       const response = await fetch('/api/buy', {
         method: 'POST',
@@ -84,15 +69,10 @@ export const BuyInterface = () => {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || 'Falha ao preparar a transação.');
-
       const transactionBuffer = Buffer.from(data.transaction, 'base64');
       const transaction = VersionedTransaction.deserialize(transactionBuffer);
-
-      // Passo 2: Pedir ao utilizador para assinar a transação
       setStatus('2/4 - Por favor, aprove a transação na sua carteira...');
       const signedTransaction = await signTransaction(transaction);
-
-      // Passo 3: Enviar a transação totalmente assinada para a API /api/send
       setStatus('3/4 - A enviar a transação para a blockchain...');
       const signedTransactionBuffer = Buffer.from(signedTransaction.serialize());
       const sendResponse = await fetch('/api/send', {
@@ -102,25 +82,17 @@ export const BuyInterface = () => {
       });
       const sendData = await sendResponse.json();
       if (!sendResponse.ok) throw new Error(sendData.error || 'Falha ao enviar a transação.');
-
-      // Passo 4: Sucesso!
       setStatus(`Sucesso! Compra de ${amount.toLocaleString()} MNT confirmada.`);
       setTxid(sendData.txid);
-      
-      // Atualizar o status da venda após a compra
-      const newStatus = await fetch('/api/sale-status').then(res => res.json());
-      setSaleData(newStatus);
-
     } catch (err) {
       console.error("Erro na compra:", err);
       const errorMessage = (err instanceof Error) ? err.message : 'Ocorreu um erro desconhecido.';
       setError(`Falha na compra: ${errorMessage}`);
-      setStatus(''); // Limpa o status para não confundir
+      setStatus('');
     } finally {
       setIsLoading(false);
     }
   }, [publicKey, signTransaction, amount, connection]);
-
 
   const handleCopy = () => {
     navigator.clipboard.writeText(contractAddress);
@@ -132,9 +104,9 @@ export const BuyInterface = () => {
     return null;
   }
 
-  const saleEnded = saleData && saleData.saleProgress >= 100;
+  // A variável saleEnded não é mais necessária
+  // const saleEnded = saleData && saleData.saleProgress >= 100;
 
-  // --- SEU JSX ORIGINAL (sem alterações de layout) ---
   return (
     <div className="flex flex-col lg:flex-row items-center justify-center gap-12 w-full max-w-6xl mx-auto px-4 py-16">
       <div className="w-full lg:w-1/2">
@@ -146,6 +118,7 @@ export const BuyInterface = () => {
         <div style={{ background: '#1a1a1a', color: 'white', padding: '40px', borderRadius: '10px', textAlign: 'center', fontFamily: 'sans-serif' }}>
           <h2 className="text-2xl font-bold">MnToken Public Sale</h2>
           <p style={{ color: '#aaa', marginTop: 0 }}>Be a part of our manganese ore extraction project.</p>
+          {/* ... (seção do endereço do contrato inalterada) ... */}
           <div style={{ margin: '20px 0', fontSize: '12px', color: '#888', wordBreak: 'break-all' }}>
             <span>Official Contract Address:</span>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px', marginTop: '5px', backgroundColor: '#222', padding: '8px', borderRadius: '5px' }}>
@@ -161,45 +134,44 @@ export const BuyInterface = () => {
           <div style={{ margin: '20px 0', padding: '10px', backgroundColor: '#222', borderRadius: '5px', border: '1px solid #444' }}>
             <p style={{ margin: 0, fontWeight: 'bold', color: '#ccc' }}>Price: 1 MNT = ${MNT_PRICE_USD}</p>
           </div>
+          
+          {/* --- MODIFICAÇÃO PARA TESTE: REMOVIDA A EXIBIÇÃO DO PROGRESSO DA VENDA --- */}
           {!saleIsActive ? (
             <div style={{ margin: '20px 0', padding: '20px', backgroundColor: '#222', borderRadius: '5px' }}>
               <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>The public sale has not started yet. Stay tuned!</p>
             </div>
-           ) : saleData ? (
+           ) : (
+            // A barra de progresso foi removida. Pode-se colocar uma mensagem estática se desejar.
             <div style={{ margin: '20px 0' }}>
-              <p style={{ margin: 0, color: '#ccc' }}>
-                {Math.floor(saleData.tokensSold).toLocaleString()} / {saleData.tokensForSale.toLocaleString()} sold
-              </p>
-              <ProgressBar progress={saleData.saleProgress} />
+              <p>A venda está ativa.</p>
             </div>
-          ) : (
-            <p>Tracking sale status...</p>
           )}
+
           <div style={{ margin: '30px 0' }}>
             <WalletMultiButton />
           </div>
+
           {publicKey && saleIsActive && (
             <>
-              {saleEnded ? (
-                <p style={{ color: '#FFC107', fontWeight: 'bold', fontSize: '18px' }}>Public sale has ended. Thank you for joining!</p>
-              ) : (
-                <div>
-                  <div style={{ margin: '20px 0' }}>
-                    <label htmlFor="amount" style={{ display: 'block', marginBottom: '10px', textAlign: 'left' }}>MNT Amount:</label>
-                    <input type="number" id="amount" value={amount} onChange={(e) => setAmount(Number(e.target.value))} style={{ padding: '12px', width: '100%', borderRadius: '5px', border: '1px solid #444', backgroundColor: '#333', color: 'white', fontSize: '16px' }} disabled={isLoading} />
-                    <div style={{ textAlign: 'right', marginTop: '10px', color: '#aaa' }}>
-                      <p style={{ margin: 0 }}>Total Cost: <span style={{ fontWeight: 'bold', color: 'white' }}>${totalCostUSD}</span></p>
-                      <p style={{ margin: 0, fontSize: '12px' }}>(Price in SOL will be calculated at checkout)</p>
-                    </div>
+              {/* A verificação de saleEnded foi removida */}
+              <div>
+                <div style={{ margin: '20px 0' }}>
+                  <label htmlFor="amount" style={{ display: 'block', marginBottom: '10px', textAlign: 'left' }}>MNT Amount:</label>
+                  <input type="number" id="amount" value={amount} onChange={(e) => setAmount(Number(e.target.value))} style={{ padding: '12px', width: '100%', borderRadius: '5px', border: '1px solid #444', backgroundColor: '#333', color: 'white', fontSize: '16px' }} disabled={isLoading} />
+                  <div style={{ textAlign: 'right', marginTop: '10px', color: '#aaa' }}>
+                    <p style={{ margin: 0 }}>Total Cost: <span style={{ fontWeight: 'bold', color: 'white' }}>${totalCostUSD}</span></p>
+                    <p style={{ margin: 0, fontSize: '12px' }}>(Price in SOL will be calculated at checkout)</p>
                   </div>
-                  <button onClick={handleBuy} disabled={isLoading || amount <= 0 || !saleData} style={{ padding: '15px 30px', backgroundColor: isLoading || !saleData ? '#555' : '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '18px', width: '100%', transition: 'background-color 0.3s' }}>
-                    {isLoading ? 'Processing...' : `Buy ${amount.toLocaleString()} MNT`}
-                  </button>
                 </div>
-              )}
+                {/* A condição `!saleData` foi removida do `disabled` */}
+                <button onClick={handleBuy} disabled={isLoading || amount <= 0} style={{ padding: '15px 30px', backgroundColor: isLoading ? '#555' : '#4CAF50', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '18px', width: '100%', transition: 'background-color 0.3s' }}>
+                  {isLoading ? 'Processing...' : `Buy ${amount.toLocaleString()} MNT`}
+                </button>
+              </div>
             </>
           )}
-          {/* Lógica de exibição de status e erro melhorada */}
+
+          {/* ... (seção de status/erro/txid inalterada) ... */}
           {(status || error || txid) && (
             <div style={{ marginTop: '20px', wordBreak: 'break-all', backgroundColor: '#222', padding: '10px', borderRadius: '5px' }}>
               {status && <p style={{ margin: 0, color: '#61dafb' }}>{status}</p>}
