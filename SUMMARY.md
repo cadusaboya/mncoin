@@ -12,8 +12,6 @@
 ## Tokenomics
 
 * [Token Overview](tokenomics/token-overview.md)
-* [Token Distribution](tokenomics/token-distribution.md)
-* [Token Vesting](tokenomics/token-vesting.md)
 
 ## Orebit Fundamentals
 
