@@ -1,6 +1,6 @@
 # Eagle Mineração
 
-This section will cover everything about Eagle, including its location, geological composition, estimated reserves, mining operations, and future expansion plans.
+This section will cover everything about Eagle, including its location, geological composition, estimated resources, mining operations, and future expansion plans.
 
 For a detailed geological and operational report, you can read the full document below:
 

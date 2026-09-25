@@ -26,7 +26,7 @@
 
 * [Eagle Mineração](eagle/eagle-mineracao.md)
 * [Location](eagle/location.md)
-* [Reserves](eagle/reserves.md)
+* [Resources](eagle/reserves.md)
 * [Geological Composition](eagle/geological-composition.md)
 * [Finance](eagle/finance/README.md)
   * [Mining Capacity & Revenue](eagle/finance/mining-capacity-and-revenue.md)

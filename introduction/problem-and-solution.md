@@ -24,6 +24,6 @@ To ensure a solid and compliant foundation, the team includes:
 * Legal and regulatory experts
 * Entrepreneurs with experience in both crypto and mining sectors
 
-Orebit’s goal is long-term sustainability, beginning with the Eagle Mine and expanding into a network of tokenized mine pools. Ongoing geological studies are already underway to confirm and expand total estimated reserves.
+Orebit’s goal is long-term sustainability, beginning with the Eagle Mine and expanding into a network of tokenized mine pools. Ongoing geological studies are already underway to confirm and expand total estimated resources.
 
 By bridging blockchain with real-world assets, Orebit offers a transparent, secure, and accessible investment model that opens the door for global participation in one of the world’s most profitable — and historically exclusive — industries.

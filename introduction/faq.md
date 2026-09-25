@@ -16,7 +16,7 @@ Orebit is led by a fully doxxed, multidisciplinary team of founders, miners, leg
 
 Rather than raising funds for a distant idea, we’re using our own mine as a proof of concept to back what we believe in. This personal commitment reflects our long-term vision of building a sustainable, real-world crypto infrastructure — starting from the ground up, literally.
 
-## What blockchain is $MNT built on?
+## What blockchain is $ORE built on?
 
 We haven’t officially selected the blockchain yet. This decision will be made in consultation with strategic partners, prioritizing performance, security, and ecosystem compatibility.
 

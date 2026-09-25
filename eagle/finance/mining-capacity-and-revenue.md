@@ -10,4 +10,4 @@ The mining operation is structured to extract and sell manganese with the follow
 | Value per MT (USD)        | $189.00         |
 | **Monthly Revenue (USD)** | **$945,000.00** |
 
-This is considering a very conservative price of manganese per metric ton in USD to facilitate fast sales while operating within the current monthly manganese extraction capacity of our existing machinery. As the project progresses, we aim to expand and increase monthly production, optimizing efficiency and scaling operations to maximize returns.
+Revenue is priced at a 42% Mn grade, below the 44–52% range identified at Eagle, and considers a very conservative price of manganese per metric ton in USD to facilitate fast sales while operating within the current monthly manganese extraction capacity of our existing machinery. As the project progresses, we aim to expand and increase monthly production, optimizing efficiency and scaling operations to maximize returns.

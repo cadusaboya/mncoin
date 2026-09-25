@@ -1,6 +1,10 @@
-# Reserves
+# Resources
 
-The initial exploratory phase identified potential resources of 3 million metric tons (MT) with Mn grades between 44% and 52%. There are plans to do more geological studies on unexplored areas to potentialy find more Manganese sites. At the current mining rate of 5,000 MT per month, the estimated mine lifespan is 50 years
+The initial exploratory phase identified estimated resources of 3 million metric tons (MT) with Mn grades between 44% and 52%. The broader 3,000-hectare Eagle site presents an exploration target of up to 10 million MT, subject to further drilling. Additional geological studies are planned on unexplored areas to potentially find more manganese occurrences. At the current mining rate of 5,000 MT per month, the estimated resources represent a mine life of about 50 years.
+
+{% hint style="info" %}
+These figures are estimates from initial exploration work. They are not reserves, which require a formal feasibility study under recognized reporting standards (e.g. JORC, NI 43-101).
+{% endhint %}
 
 ## Current Mining Operations
 

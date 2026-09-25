@@ -1,8 +1,8 @@
 # Token Overview
 
-| Token Name                    | MnToken       |
+| Token Name                    | Orebit        |
 | ----------------------------- | ------------- |
-| **Token Ticker**              | $MNT          |
+| **Token Ticker**              | $ORE          |
 | **Listing Date**              | _TBA_         |
 | **Contract Address**          | _TBA_         |
 | **Total Supply**              | 1,000,000,000 |

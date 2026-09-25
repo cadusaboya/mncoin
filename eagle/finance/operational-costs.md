@@ -9,7 +9,7 @@ Below is the estimated monthly cost structure for mining operations, including e
 | Excavator         | 2        | 6,080               | 23.03%         |
 | Mechanical Shovel | 2        | 4,800               | 18.18%         |
 | Dump Truck (16m³) | 5        | 6,400               | 24.24%         |
-| Water Truck       | 1        | 1,280               | 485%           |
+| Water Truck       | 1        | 1,280               | 4.85%          |
 | Motor Grader      | 1        | 2,400               | 9.09%          |
 | Generator         | 1        | 4,800               | 18.18%         |
 | Support Vehicles  | 2        | 640                 | 2.42%          |
@@ -44,7 +44,7 @@ Below is the estimated monthly cost structure for mining operations, including e
 | Fuel Consumption         | 26,400   | R$171,600.00     | $30,000.00      | 28.94%         |
 | Employee Payroll         | 1        | R$109,374.00     | $19,121.33      | 18.44%         |
 | Machinery & Truck Rental | 1        | R$280,000.00     | $48,951.05      | 47.22%         |
-| **Total**                |          | **R$593.014,00** | **$103,672.73** | **100%**       |
+| **Total**                |          | **R$593,014.00** | **$103,672.73** | **100%**       |
 
 
 
