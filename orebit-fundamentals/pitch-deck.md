@@ -1,3 +1,3 @@
 # Pitch Deck
 
-{% file src="../.gitbook/assets/Orebit - Pitch Deck.pdf" %}
+{% file src="../.gitbook/assets/Landscape - Orebit Pitch Deck.pdf" %}
